@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameScoreFetchDataJob.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
-    [Migration("20200303183624_CreateDatabase")]
+    [Migration("20200303194032_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
