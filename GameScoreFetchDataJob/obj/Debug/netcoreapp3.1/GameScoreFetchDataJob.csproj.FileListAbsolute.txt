@@ -1,0 +1,13 @@
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\GameScoreFetchDataJob.exe
+C:\Projects\GameScore\GameScoreFetchDataJob\obj\Debug\netcoreapp3.1\GameScoreFetchDataJob.csprojAssemblyReference.cache
+C:\Projects\GameScore\GameScoreFetchDataJob\obj\Debug\netcoreapp3.1\GameScoreFetchDataJob.AssemblyInfoInputs.cache
+C:\Projects\GameScore\GameScoreFetchDataJob\obj\Debug\netcoreapp3.1\GameScoreFetchDataJob.AssemblyInfo.cs
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\GameScoreFetchDataJob.deps.json
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\GameScoreFetchDataJob.runtimeconfig.json
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\GameScoreFetchDataJob.runtimeconfig.dev.json
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\GameScoreFetchDataJob.dll
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\GameScoreFetchDataJob.pdb
+C:\Projects\GameScore\GameScoreFetchDataJob\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Projects\GameScore\GameScoreFetchDataJob\obj\Debug\netcoreapp3.1\GameScoreFetchDataJob.csproj.CopyComplete
+C:\Projects\GameScore\GameScoreFetchDataJob\obj\Debug\netcoreapp3.1\GameScoreFetchDataJob.dll
+C:\Projects\GameScore\GameScoreFetchDataJob\obj\Debug\netcoreapp3.1\GameScoreFetchDataJob.pdb
