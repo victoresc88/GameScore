@@ -1,4 +1,4 @@
-﻿using GameScoreFetchDataJob.Models;
+﻿using GameScoreFetchDataJob.OriginalModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,32 +12,39 @@ namespace GameScoreFetchDataJob
 {
 	public class FetchDataManager
 	{
-		public async Task<List<GameOrigin>> GetGamesAsync()
-		{
-			var gameOriginList = await GetGamesData();
-
-			return gameOriginList;
-		}
-
-		private async Task<List<GameOrigin>> GetGamesData()
+		public async Task<List<OriginalGameData>> GetGamesAsyncData()
 		{
 			var client = new HttpClient();
 			var baseUrl = "https://api.rawg.io/api/games?page=1";
-			var gameOriginList = new List<GameOrigin>();
+			var originalGameDataList = new List<OriginalGameData>();
+			var count = 0;
 
-			while (!string.IsNullOrEmpty(baseUrl))
+			while (!string.IsNullOrEmpty(baseUrl) && count < 5)
 			{
 				var content = await client.GetStringAsync(baseUrl);
+				var OriginalGameData = JsonConvert.DeserializeObject<OriginalGameData>(content);
 
-				var gameOrigin = JsonConvert.DeserializeObject<GameOrigin>(content);
-				baseUrl = gameOrigin.next;
+				originalGameDataList.Add(OriginalGameData);
+				baseUrl = OriginalGameData.next;
 
-				gameOriginList.Add(gameOrigin);
+				Console.WriteLine(OriginalGameData.next);
 
-				Console.WriteLine(gameOrigin.next);
+				count++;
 			}
 
-			return gameOriginList;
+			return originalGameDataList;
+		}
+
+		public void MapOriginalGameDataToDbContextModels(List<OriginalGameData> originalGameData)
+		{
+			var gameScoreSeedContextFactory = new GameScoreSeedContextFactory();
+			var context = gameScoreSeedContextFactory.CreateDbContext();
+			var games = context.Games;
+
+			foreach (var game in games)
+			{
+				Console.WriteLine(game.Name);
+			}
 		}
 	}
 }
