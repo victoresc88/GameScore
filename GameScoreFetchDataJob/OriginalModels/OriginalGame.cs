@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameScoreFetchDataJob.OriginalModels
 {
-	public class Game
+	public class OriginalGame
 	{
       public int id { get; set; }
       public string slug { get; set; }
@@ -26,7 +26,7 @@ namespace GameScoreFetchDataJob.OriginalModels
       public int reviews_count { get; set; }
       public string saturated_color { get; set; }
       public string dominant_color { get; set; }
-      public List<Platforms> platforms { get; set; }
+      public List<OriginalPlatforms> platforms { get; set; }
       public List<ParentPlatforms> parent_platforms { get; set; }
       public List<Genre> genres { get; set; }
       public List<Stores> stores { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameScoreFetchDataJob.OriginalModels
 {
-   public class Platform
+   public class OriginalPlatform
    {
       public int id { get; set; }
       public string name { get; set; }

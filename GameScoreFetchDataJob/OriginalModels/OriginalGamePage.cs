@@ -4,12 +4,12 @@ using System.Text;
 
 namespace GameScoreFetchDataJob.OriginalModels
 {
-	public class OriginalGameData
+	public class OriginalGamePage
 	{
       public int count { get; set; }
       public string next { get; set; }
       public object previous { get; set; }
-      public List<Game> results { get; set; }
+      public List<OriginalGame> results { get; set; }
       public string seo_title { get; set; }
       public string seo_description { get; set; }
       public string seo_keywords { get; set; }
