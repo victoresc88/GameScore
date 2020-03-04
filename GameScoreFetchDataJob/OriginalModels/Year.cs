@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace GameScoreFetchDataJob.OriginalModels
 {
 	public class Year

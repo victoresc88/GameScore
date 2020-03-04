@@ -51,8 +51,17 @@ namespace GameScoreFetchDataJob
 				foreach (var originalGame in originalGamePage.results)
 				{
 					var game = mapper.Map<OriginalGame, Game>(originalGame);
-					context.Games.Add(game);
+					context.Add<Game>(game);
 				}
+			}
+
+			try
+			{
+				context.SaveChanges();
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine(ex.Message);
 			}
 		}
 	}
