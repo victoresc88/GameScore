@@ -1,7 +1,7 @@
 ﻿using GameScoreFetchDataJob.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameScoreFetchDataJob
+namespace GameScoreFetchDataJob.Repository
 {
     public class GameScoreSeedContext : DbContext
     {

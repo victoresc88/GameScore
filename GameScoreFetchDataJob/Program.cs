@@ -6,10 +6,10 @@ namespace GameScoreFetchDataJob
 	{
 		static async Task Main(string[] args)
 		{
-			var fetchDataManager = new FetchDataManager();
-			var gamePagesApiList = await fetchDataManager.GetGamesAsyncData();
+			var gameScoreSeedBusiness = new GameScoreSeedBusiness();
+			var gamePagesApiList = await gameScoreSeedBusiness.GetGamesAsyncData();
 			
-			fetchDataManager.SeedGameScoreDatabase(gamePagesApiList);
+			gameScoreSeedBusiness.SeedGameScoreDatabase(gamePagesApiList);
 		}
 	}
 }

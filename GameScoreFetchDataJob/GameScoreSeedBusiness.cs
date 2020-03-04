@@ -2,7 +2,7 @@
 using GameScoreFetchDataJob.Mapping;
 using GameScoreFetchDataJob.Models;
 using GameScoreFetchDataJob.RawgApiModels;
-using Microsoft.EntityFrameworkCore;
+using GameScoreFetchDataJob.Repository;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,8 +11,15 @@ using System.Threading.Tasks;
 
 namespace GameScoreFetchDataJob
 {
-	public class FetchDataManager
+	public class GameScoreSeedBusiness
 	{
+		private IGameScoreSeedRepository _gameScoreSeedRepository;
+
+		public GameScoreSeedBusiness()
+		{
+			_gameScoreSeedRepository = new GameScoreSeedRepository();	
+		}
+
 		public async Task<List<GameApiPage>> GetGamesAsyncData()
 		{
 			var url = "https://api.rawg.io/api/games?page=1";
@@ -36,21 +43,10 @@ namespace GameScoreFetchDataJob
 
 		public void SeedGameScoreDatabase(List<GameApiPage> gamePagesApiList)
 		{
-			var gameList = MapApiModelsToGameScoreModels(gamePagesApiList);
 			
-			var context = new GameScoreSeedContextFactory().CreateDbContext();
-			try
-			{
-				context.Database.OpenConnection();
-				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games ON");
-				context.Games.AddRange(gameList);
-				context.SaveChanges();
-				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games OFF");
-			}
-			finally
-			{
-				context.Database.CloseConnection();
-			}
+			var gameList = MapApiModelsToGameScoreModels(gamePagesApiList);
+
+			_gameScoreSeedRepository.SeedDB(gameList);
 		}
 
 		private IEnumerable<Game> MapApiModelsToGameScoreModels(List<GameApiPage> gamePagesApiList)

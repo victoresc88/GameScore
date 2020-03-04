@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace GameScoreFetchDataJob
+namespace GameScoreFetchDataJob.Repository
 {
     public class GameScoreSeedContextFactory : IDesignTimeDbContextFactory<GameScoreSeedContext>
     {
