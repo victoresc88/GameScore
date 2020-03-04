@@ -1,5 +1,5 @@
 ﻿
-namespace GameScoreFetchDataJob.OriginalModels
+namespace GameScoreFetchDataJob.RawgApiModels
 {
    public class Rating
    {

@@ -1,7 +1,7 @@
 ﻿
-namespace GameScoreFetchDataJob.OriginalModels
+namespace GameScoreFetchDataJob.RawgApiModels
 {
-   public class OriginalPlatform
+   public class PlatformApi
    {
       public int id { get; set; }
       public string name { get; set; }

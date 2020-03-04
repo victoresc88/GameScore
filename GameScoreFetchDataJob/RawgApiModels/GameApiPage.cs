@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace GameScoreFetchDataJob.OriginalModels
+namespace GameScoreFetchDataJob.RawgApiModels
 {
-	public class OriginalGamePage
+	public class GameApiPage
 	{
       public int count { get; set; }
       public string next { get; set; }
       public object previous { get; set; }
-      public List<OriginalGame> results { get; set; }
+      public List<GameApi> results { get; set; }
       public string seo_title { get; set; }
       public string seo_description { get; set; }
       public string seo_keywords { get; set; }

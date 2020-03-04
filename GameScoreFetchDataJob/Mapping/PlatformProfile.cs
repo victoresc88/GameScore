@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.OriginalModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using GameScoreFetchDataJob.RawgApiModels;
 
 namespace GameScoreFetchDataJob.Mapping
 {
@@ -11,7 +8,7 @@ namespace GameScoreFetchDataJob.Mapping
     {
         public PlatformProfile()
         {
-            CreateMap<OriginalPlatform, Platform>();
+            CreateMap<PlatformApi, Platform>();
 
             ReplaceMemberName("id", "Id");
             ReplaceMemberName("name", "Name");

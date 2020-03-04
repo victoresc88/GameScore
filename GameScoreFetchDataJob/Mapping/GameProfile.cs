@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.OriginalModels;
+using GameScoreFetchDataJob.RawgApiModels;
 
 namespace GameScoreFetchDataJob.Mapping
 {
@@ -8,7 +8,7 @@ namespace GameScoreFetchDataJob.Mapping
     {
         public GameProfile()
         {
-            CreateMap<OriginalGame, Game>();
+            CreateMap<GameApi, Game>();
 
             ReplaceMemberName("id", "Id");
             ReplaceMemberName("name", "Name");

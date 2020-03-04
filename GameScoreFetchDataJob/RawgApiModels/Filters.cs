@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GameScoreFetchDataJob.OriginalModels
+namespace GameScoreFetchDataJob.RawgApiModels
 {
 	public class Filters
 	{

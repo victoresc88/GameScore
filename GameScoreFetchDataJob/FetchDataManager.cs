@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using GameScoreFetchDataJob.Mapping;
 using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.OriginalModels;
+using GameScoreFetchDataJob.RawgApiModels;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,30 +13,30 @@ namespace GameScoreFetchDataJob
 {
 	public class FetchDataManager
 	{
-		public async Task<List<OriginalGamePage>> GetGamesAsyncData()
+		public async Task<List<GameApiPage>> GetGamesAsyncData()
 		{
 			var client = new HttpClient();
 			var baseUrl = "https://api.rawg.io/api/games?page=1";
-			var originalGameDataList = new List<OriginalGamePage>();
+			var GameApiDataList = new List<GameApiPage>();
 			var count = 0;
 
 			while (!string.IsNullOrEmpty(baseUrl) && count < 5)
 			{
 				var content = await client.GetStringAsync(baseUrl);
-				var originalGamePage = JsonConvert.DeserializeObject<OriginalGamePage>(content);
+				var GameApiPage = JsonConvert.DeserializeObject<GameApiPage>(content);
 
-				originalGameDataList.Add(originalGamePage);
-				baseUrl = originalGamePage.next;
+				GameApiDataList.Add(GameApiPage);
+				baseUrl = GameApiPage.next;
 
-				Console.WriteLine(originalGamePage.next);
+				Console.WriteLine(GameApiPage.next);
 
 				count++;
 			}
 
-			return originalGameDataList;
+			return GameApiDataList;
 		}
 
-		public void MapOriginalGameDataToDbContextModels(List<OriginalGamePage> originalGamePageData)
+		public void MapGameApiDataToDbContextModels(List<GameApiPage> GameApiPageData)
 		{
 			var gameScoreSeedContextFactory = new GameScoreSeedContextFactory();
 			var context = gameScoreSeedContextFactory.CreateDbContext();
@@ -46,22 +47,25 @@ namespace GameScoreFetchDataJob
 			});
 			var mapper = config.CreateMapper();
 
-			foreach (var originalGamePage in originalGamePageData)
+			foreach (var GameApiPage in GameApiPageData)
 			{
-				foreach (var originalGame in originalGamePage.results)
+				foreach (var GameApi in GameApiPage.results)
 				{
-					var game = mapper.Map<OriginalGame, Game>(originalGame);
+					var game = mapper.Map<GameApi, Game>(GameApi);
 					context.Add<Game>(game);
 				}
 			}
 
+			context.Database.OpenConnection();
 			try
 			{
+				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games ON");
 				context.SaveChanges();
+				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games OFF");
 			}
-			catch(Exception ex)
+			finally
 			{
-				Console.WriteLine(ex.Message);
+				context.Database.CloseConnection();
 			}
 		}
 	}
