@@ -1,3 +1,3 @@
 .vs/
-bin
-obj
+GameScoreFetchDataJob/bin/Debug/netcoreapp3.1
+GameScoreFetchDataJob/obj
