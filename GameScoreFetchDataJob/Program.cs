@@ -7,9 +7,9 @@ namespace GameScoreFetchDataJob
 		static async Task Main(string[] args)
 		{
 			var fetchDataManager = new FetchDataManager();
-			var GameApiData = await fetchDataManager.GetGamesAsyncData();
+			var gamePagesApiList = await fetchDataManager.GetGamesAsyncData();
 			
-			fetchDataManager.MapGameApiDataToDbContextModels(GameApiData);
+			fetchDataManager.SeedGameScoreDatabase(gamePagesApiList);
 		}
 	}
 }
