@@ -1,7 +1,7 @@
 ﻿
 namespace GameScoreFetchDataJob.ApiModels
 {
-   public class Genre
+   public class GenreApi
    {
       public int id { get; set; }
       public string name { get; set; }

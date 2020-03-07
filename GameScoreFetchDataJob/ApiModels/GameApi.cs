@@ -26,7 +26,7 @@ namespace GameScoreFetchDataJob.ApiModels
       public string dominant_color { get; set; }
       public List<PlatformsApi> platforms { get; set; }
       public List<ParentPlatforms> parent_platforms { get; set; }
-      public List<Genre> genres { get; set; }
+      public List<GenreApi> genres { get; set; }
       public List<StoresApi> StoresApi { get; set; }
       public Clip clip { get; set; }
       public List<Tag> tags { get; set; }

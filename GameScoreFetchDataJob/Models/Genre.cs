@@ -6,6 +6,7 @@ namespace GameScoreFetchDataJob.Models
     public class Genre
     {
         public int Id { get; set; }
+        public int OriginalId { get; set; }
         public string Name { get; set; }
     }
 }

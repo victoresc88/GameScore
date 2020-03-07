@@ -9,7 +9,7 @@ namespace GameScoreFetchDataJob
 			var gameScoreSeedBusiness = new GameScoreSeedBusiness();
 			var gamePagesApiList = await gameScoreSeedBusiness.GetGamesAsyncData();
 			
-			gameScoreSeedBusiness.SeedGameScoreDatabase(gamePagesApiList);
+			gameScoreSeedBusiness.SeedApplicationDatabase(gamePagesApiList);
 		}
 	}
 }

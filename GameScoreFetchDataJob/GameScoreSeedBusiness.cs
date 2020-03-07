@@ -8,7 +8,6 @@ using GameScoreFetchDataJob.Mapping;
 using GameScoreFetchDataJob.Repository;
 using GameScoreFetchDataJob.ApiModels;
 
-using AutoMapper;
 using Newtonsoft.Json;
 
 namespace GameScoreFetchDataJob
@@ -28,7 +27,7 @@ namespace GameScoreFetchDataJob
 			var gamePagesApiList = new List<GameApiPage>();
 			var count = 1;
 
-			while (!string.IsNullOrEmpty(url) && count <= 2)
+			while (!string.IsNullOrEmpty(url) && count <= 1)
 			{
 				var content = await new HttpClient().GetStringAsync(url);
 				var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
@@ -43,33 +42,17 @@ namespace GameScoreFetchDataJob
 			return gamePagesApiList;
 		}
 
-		public void SeedGameScoreDatabase(List<GameApiPage> gamePagesApiList)
-		{
-			
-			var gameList = MapApiModelsToGameScoreModels(gamePagesApiList);
-
-			_gameScoreSeedRepository.SeedDB(gameList);
-		}
-
-		private IEnumerable<Game> MapApiModelsToGameScoreModels(List<GameApiPage> gamePagesApiList)
+		public void SeedApplicationDatabase(List<GameApiPage> gamePagesApiList)
 		{
 			var gameList = new List<Game>();
-			var config = new MapperConfiguration(cfg => {
-				cfg.AddProfile<GameProfile>();
-				cfg.AddProfile<PlatformProfile>();
-			});
-			var mapper = config.CreateMapper();
 
-			foreach (var gameApiPage in gamePagesApiList)
+			foreach (var gamePageApi in gamePagesApiList)
 			{
-				foreach (var gameApi in gameApiPage.results)
-				{
-					var game = mapper.Map<GameApi, Game>(gameApi);
-					gameList.Add(game);
-				}
+				gameList.AddRange(MapTools.MapApiModelsToApplicationModels(gamePageApi.results));
 			}
 
-			return gameList;
+			// Mapping works, watch out for EF issues when seeding
+			_gameScoreSeedRepository.SeedDB(gameList);
 		}
 	}
 }

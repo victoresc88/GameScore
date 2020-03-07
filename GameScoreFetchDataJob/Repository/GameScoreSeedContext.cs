@@ -9,7 +9,7 @@ namespace GameScoreFetchDataJob.Repository
         public DbSet<Platform> Platforms { get; set; }
 
         public GameScoreSeedContext(DbContextOptions<GameScoreSeedContext> options) : base(options)
-        {
+        {        
         }
     }
 }
