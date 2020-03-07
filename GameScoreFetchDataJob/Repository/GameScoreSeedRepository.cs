@@ -14,7 +14,7 @@ namespace GameScoreFetchDataJob.Repository
 				context.Database.OpenConnection();
 				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games ON");
 				context.Games.AddRange(gameList);
-				context.SaveChanges();
+				//context.SaveChanges();
 				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games OFF");
 			}
 			finally

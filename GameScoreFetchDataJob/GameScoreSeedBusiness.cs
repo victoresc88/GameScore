@@ -1,13 +1,15 @@
-﻿using AutoMapper;
-using GameScoreFetchDataJob.Mapping;
-using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.RawgApiModels;
-using GameScoreFetchDataJob.Repository;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
+using GameScoreFetchDataJob.Models;
+using GameScoreFetchDataJob.Mapping;
+using GameScoreFetchDataJob.Repository;
+using GameScoreFetchDataJob.RawgApiModels;
+
+using AutoMapper;
+using Newtonsoft.Json;
 
 namespace GameScoreFetchDataJob
 {
@@ -24,9 +26,9 @@ namespace GameScoreFetchDataJob
 		{
 			var url = "https://api.rawg.io/api/games?page=1";
 			var gamePagesApiList = new List<GameApiPage>();
-			var count = 0;
+			var count = 1;
 
-			while (!string.IsNullOrEmpty(url) && count < 5)
+			while (!string.IsNullOrEmpty(url) && count <= 2)
 			{
 				var content = await new HttpClient().GetStringAsync(url);
 				var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
@@ -70,6 +72,4 @@ namespace GameScoreFetchDataJob
 			return gameList;
 		}
 	}
-
-	
 }
