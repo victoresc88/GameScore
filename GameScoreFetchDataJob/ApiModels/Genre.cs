@@ -1,5 +1,5 @@
 ﻿
-namespace GameScoreFetchDataJob.RawgApiModels
+namespace GameScoreFetchDataJob.ApiModels
 {
    public class Genre
    {

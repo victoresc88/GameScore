@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace GameScoreFetchDataJob.RawgApiModels
+namespace GameScoreFetchDataJob.ApiModels
 {
 	public class Year
 	{

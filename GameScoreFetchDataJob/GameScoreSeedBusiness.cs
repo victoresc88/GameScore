@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using GameScoreFetchDataJob.Models;
 using GameScoreFetchDataJob.Mapping;
 using GameScoreFetchDataJob.Repository;
-using GameScoreFetchDataJob.RawgApiModels;
+using GameScoreFetchDataJob.ApiModels;
 
 using AutoMapper;
 using Newtonsoft.Json;

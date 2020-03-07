@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.RawgApiModels;
+using GameScoreFetchDataJob.ApiModels;
 
 namespace GameScoreFetchDataJob.Mapping
 {

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="RawgApiModels\ve-B708.tmp" />
+    <None Remove="ApiModels\ve-B708.tmp" />
   </ItemGroup>
 
   <ItemGroup>
