@@ -1,26 +1,88 @@
 ﻿using GameScoreFetchDataJob.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameScoreFetchDataJob.Repository
 {
     public class GameScoreSeedRepository : IGameScoreSeedRepository
     {
-        public void SeedDB(IEnumerable<Game> gameList)
-        {
-			var context = new GameScoreSeedContextFactory().CreateDbContext();
+		private GameScoreSeedContext _context;
+
+		public GameScoreSeedRepository()
+		{
+			_context = new GameScoreSeedContextFactory().CreateDbContext();
+		}
+
+		public void AddGame(Game game)
+		{
+			_context.Games.Add(game);
+			SaveChanges();
+		}
+
+		public void AddPlatformGame(List<Platform> platformList, Game game)
+		{
+			foreach (var platform in platformList)
+			{
+				if (!_context.Platforms.Any(p => p.Id == platform.Id))
+				{
+					_context.Platforms.Add(platform);
+					SaveChanges();
+				}
+					
+				_context.PlatformGames.Add(new PlatformGame {
+					Game = game,
+					GameId = game.Id,
+					Platform = platform,
+					PlatformId = platform.Id
+				});
+
+				SaveChanges();
+			}
+
+			
+		}
+
+		public void AddGenreGame(List<Genre> genreList, Game game)
+		{
+			foreach (var genre in genreList)
+			{
+				if (!_context.Genres.Any(g => g.Id == genre.Id))
+				{
+					_context.Genres.Add(genre);
+					SaveChanges();
+				}
+
+				_context.GenreGames.Add(new GenreGame {
+					Game = game,
+					GameId = game.Id,
+					Genre = genre,
+					GenreId = genre.Id
+				});
+
+				SaveChanges();
+			}
+
+			
+		}
+
+		private void SaveChanges()
+		{
 			try
 			{
-				context.Database.OpenConnection();
-				//context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games ON");
-				context.Games.AddRange(gameList);
-				context.SaveChanges();
-				//context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Games OFF");
+				using (var transaction = _context.Database.BeginTransaction())
+				{
+					_context.SaveChanges();
+
+					transaction.Commit();
+				}
+					
 			}
-			finally
+			catch(Exception ex)
 			{
-				context.Database.CloseConnection();
+				Console.WriteLine(ex);
 			}
 		}
-    }
+	}
 }

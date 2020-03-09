@@ -42,17 +42,22 @@ namespace GameScoreFetchDataJob
 			return gamePagesApiList;
 		}
 
-		public void SeedApplicationDatabase(List<GameApiPage> gamePagesApiList)
+		public void SeedApplicationDatabase(List<GameApiPage> gameApiPagesList)
 		{
-			var gameList = new List<Game>();
-
-			foreach (var gamePageApi in gamePagesApiList)
+			foreach (var gameApiPage in gameApiPagesList)
 			{
-				gameList.AddRange(MapTools.MapApiModelsToApplicationModels(gamePageApi.results));
-			}
+				foreach (var gameApi in gameApiPage.results)
+				{
+					var game = MapTools.MapApiGameToApplicationModel(gameApi);
+					_gameScoreSeedRepository.AddGame(game);
 
-			// Mapping works, watch out for EF issues when seeding
-			_gameScoreSeedRepository.SeedDB(gameList);
+					var platformList = MapTools.MapApiPlatformsToApplicationModels(gameApi.platforms, game);
+					_gameScoreSeedRepository.AddPlatformGame(platformList, game);
+
+					var genreList = MapTools.MapApiGenresToApplicationModels(gameApi.genres, game);
+					_gameScoreSeedRepository.AddGenreGame(genreList, game);
+				}
+			}
 		}
 	}
 }

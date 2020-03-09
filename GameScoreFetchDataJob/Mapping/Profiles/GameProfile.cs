@@ -19,8 +19,6 @@ namespace GameScoreFetchDataJob.Mapping.Profiles
                     .ForMember(dto => dto.PlayTime, opt => opt.MapFrom(src => src.playtime))
                     .ForMember(dto => dto.Metacritic, opt => opt.MapFrom(src => src.metacritic))
                     .ForMember(dto => dto.ImageUrl, opt => opt.MapFrom(src => src.background_image))
-                    .ForMember(dto => dto.Genres, opt => opt.Ignore())
-                    .ForMember(dto => dto.Platforms, opt => opt.Ignore())
                     .ForMember(dto => dto.Score, opt => opt.Ignore());
             });
         }

@@ -2,62 +2,42 @@
 using GameScoreFetchDataJob.ApiModels;
 using GameScoreFetchDataJob.Mapping.Profiles;
 using GameScoreFetchDataJob.Models;
+using GameScoreFetchDataJob.Repository;
 using System.Collections.Generic;
 
 namespace GameScoreFetchDataJob.Mapping
 {
     public static class MapTools
     {
-		public static IEnumerable<Game> MapApiModelsToApplicationModels(List<GameApi> gameApiList)
+		public static Game MapApiGameToApplicationModel(GameApi gameApi)
 		{
 			var mapper = SetMapperConfiguration();
-			var gameList = new List<Game>();
 
-			foreach (var gameApi in gameApiList)
-			{
-				var game = MapApiGameToGameModel(gameApi, mapper);
-				game.Platforms = MapApiPlatformsToPlatformModels(gameApi.platforms, game, mapper);
-				game.Genres = MapApiGenreToGenreModels(gameApi.genres, game, mapper);
-
-				gameList.Add(game);
-			}
-			
-			return gameList;
-		}
-
-		private static Game MapApiGameToGameModel(GameApi gameApi, IMapper mapper)
-		{
 			return mapper.Map<GameApi, Game>(gameApi);
 		}
 
-		private static List<PlatformGame> MapApiPlatformsToPlatformModels(List<PlatformsApi> platformApiList, Game game, IMapper mapper)
+		public static List<Platform> MapApiPlatformsToApplicationModels(List<PlatformsApi> platformApiList, Game game)
 		{
-			var platformGameList = new List<PlatformGame>();
+			var mapper = SetMapperConfiguration();
+
+			var platformList = new List<Platform>();
 
 			foreach (var platformApi in platformApiList)
-			{
-				platformGameList.Add(new PlatformGame() {
-					Game = game,
-					Platform = mapper.Map<PlatformApi, Platform>(platformApi.platform)
-				});
-			}
+				platformList.Add(mapper.Map<PlatformApi, Platform>(platformApi.platform));		
 
-			return platformGameList;
+			return platformList;
 		}
 
-		private static List<GenreGame> MapApiGenreToGenreModels(List<GenreApi> genreApiList, Game game, IMapper mapper)
+		public static List<Genre> MapApiGenresToApplicationModels(List<GenreApi> genreApiList, Game game)
 		{
-			var genreGameList = new List<GenreGame>();
-			foreach (var genreApi in genreApiList)
-			{		
-				genreGameList.Add(new GenreGame()
-				{
-					Game = game,
-					Genre = mapper.Map<GenreApi, Genre>(genreApi)
-				});
-			}
+			var mapper = SetMapperConfiguration();
 
-			return genreGameList;
+			var genreList = new List<Genre>();
+			
+			foreach (var genreApi in genreApiList)
+				genreList.Add(mapper.Map<GenreApi, Genre>(genreApi));			
+
+			return genreList;
 		}
 
 		private static IMapper SetMapperConfiguration()

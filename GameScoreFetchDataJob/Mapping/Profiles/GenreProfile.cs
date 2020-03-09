@@ -10,7 +10,7 @@ namespace GameScoreFetchDataJob.Mapping.Profiles
         {
             var configuration = new MapperConfiguration(cfg => {
                 CreateMap<GenreApi, Genre>()
-                    .ForMember(dto => dto.OriginalId, opt => opt.MapFrom(src => src.id))
+                    .ForMember(dto => dto.Id, opt => opt.MapFrom(src => src.id))
                     .ForMember(dto => dto.Name, opt => opt.MapFrom(src => src.name));
             });
         }

@@ -4,14 +4,16 @@ using GameScoreFetchDataJob.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScoreFetchDataJob.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
-    partial class GameScoreSeedContextModelSnapshot : ModelSnapshot
+    [Migration("20200309223311_FixTheHugeIdMess")]
+    partial class FixTheHugeIdMess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +162,7 @@ namespace GameScoreFetchDataJob.Migrations
             modelBuilder.Entity("GameScoreFetchDataJob.Models.GenreGame", b =>
                 {
                     b.HasOne("GameScoreFetchDataJob.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Genres")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -175,7 +177,7 @@ namespace GameScoreFetchDataJob.Migrations
             modelBuilder.Entity("GameScoreFetchDataJob.Models.PlatformGame", b =>
                 {
                     b.HasOne("GameScoreFetchDataJob.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Platforms")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

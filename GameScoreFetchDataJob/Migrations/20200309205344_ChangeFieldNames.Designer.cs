@@ -4,14 +4,16 @@ using GameScoreFetchDataJob.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScoreFetchDataJob.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
-    partial class GameScoreSeedContextModelSnapshot : ModelSnapshot
+    [Migration("20200309205344_ChangeFieldNames")]
+    partial class ChangeFieldNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,16 +76,20 @@ namespace GameScoreFetchDataJob.Migrations
 
             modelBuilder.Entity("GameScoreFetchDataJob.Models.GenreGame", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("GameId", "GenreId");
+                    b.HasIndex("GameId");
 
                     b.HasIndex("GenreId");
 
@@ -107,16 +113,20 @@ namespace GameScoreFetchDataJob.Migrations
 
             modelBuilder.Entity("GameScoreFetchDataJob.Models.PlatformGame", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<int>("PlatformId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("GameId", "PlatformId");
+                    b.HasIndex("GameId");
 
                     b.HasIndex("PlatformId");
 
@@ -160,7 +170,7 @@ namespace GameScoreFetchDataJob.Migrations
             modelBuilder.Entity("GameScoreFetchDataJob.Models.GenreGame", b =>
                 {
                     b.HasOne("GameScoreFetchDataJob.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Genres")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -175,7 +185,7 @@ namespace GameScoreFetchDataJob.Migrations
             modelBuilder.Entity("GameScoreFetchDataJob.Models.PlatformGame", b =>
                 {
                     b.HasOne("GameScoreFetchDataJob.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Platforms")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
