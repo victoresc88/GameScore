@@ -56,6 +56,8 @@ namespace GameScoreFetchDataJob
 
 					var genreList = MapTools.MapApiGenresToApplicationModels(gameApi.genres);
 					_gameScoreSeedRepository.AddGenreGame(genreList, game);
+
+					Console.WriteLine($"Processed: {game.Name}");
 				}
 			}
 		}
