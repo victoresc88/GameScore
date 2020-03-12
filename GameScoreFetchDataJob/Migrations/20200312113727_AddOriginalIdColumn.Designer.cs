@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameScoreFetchDataJob.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
-    [Migration("20200309231857_RemoveFieldsFromGamesTable")]
-    partial class RemoveFieldsFromGamesTable
+    [Migration("20200312113727_AddOriginalIdColumn")]
+    partial class AddOriginalIdColumn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,6 +69,9 @@ namespace GameScoreFetchDataJob.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OriginalId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
@@ -101,6 +104,9 @@ namespace GameScoreFetchDataJob.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OriginalId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

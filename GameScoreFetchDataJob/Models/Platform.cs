@@ -2,11 +2,11 @@
 
 namespace GameScoreFetchDataJob.Models
 {
-    [Table("Platforms")]
-    public class Platform
-    {
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+	[Table("Platforms")]
+	public class Platform
+	{
+		public int Id { get; set; }
+		public int OriginalId { get; set; }
+		public string Name { get; set; }
+	}
 }

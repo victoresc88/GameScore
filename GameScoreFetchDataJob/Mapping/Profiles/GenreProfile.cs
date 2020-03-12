@@ -4,15 +4,17 @@ using GameScoreFetchDataJob.Models;
 
 namespace GameScoreFetchDataJob.Mapping.Profiles
 {
-    public class GenreProfile : Profile
-    {
-        public GenreProfile()
-        {
-            var configuration = new MapperConfiguration(cfg => {
-                CreateMap<GenreApi, Genre>()
-                    .ForMember(dto => dto.Id, opt => opt.MapFrom(src => src.id))
-                    .ForMember(dto => dto.Name, opt => opt.MapFrom(src => src.name));
-            });
-        }
-    }
+	public class GenreProfile : Profile
+	{
+		public GenreProfile()
+		{
+			var configuration = new MapperConfiguration(cfg =>
+			{
+				CreateMap<GenreApi, Genre>()
+					.ForMember(dto => dto.Id, opt => opt.Ignore())
+					.ForMember(dto => dto.OriginalId, opt => opt.MapFrom(src => src.id))
+					.ForMember(dto => dto.Name, opt => opt.MapFrom(src => src.name));
+			});
+		}
+	}
 }

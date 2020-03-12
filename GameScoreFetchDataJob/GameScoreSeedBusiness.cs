@@ -51,10 +51,10 @@ namespace GameScoreFetchDataJob
 					var game = MapTools.MapApiGameToApplicationModel(gameApi);
 					_gameScoreSeedRepository.AddGame(game);
 
-					var platformList = MapTools.MapApiPlatformsToApplicationModels(gameApi.platforms, game);
+					var platformList = MapTools.MapApiPlatformsToApplicationModels(gameApi.platforms);
 					_gameScoreSeedRepository.AddPlatformGame(platformList, game);
 
-					var genreList = MapTools.MapApiGenresToApplicationModels(gameApi.genres, game);
+					var genreList = MapTools.MapApiGenresToApplicationModels(gameApi.genres);
 					_gameScoreSeedRepository.AddGenreGame(genreList, game);
 				}
 			}

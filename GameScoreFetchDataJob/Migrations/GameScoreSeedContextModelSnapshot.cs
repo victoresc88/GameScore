@@ -67,6 +67,9 @@ namespace GameScoreFetchDataJob.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OriginalId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
@@ -99,6 +102,9 @@ namespace GameScoreFetchDataJob.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OriginalId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
