@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -16,6 +17,12 @@ namespace GameScoreFetchDataJob
 	{
 		private IGameScoreSeedRepository _gameScoreSeedRepository;
 
+		private List<Game> m_gameList = new List<Game>();
+		private List<Platform> m_platformList = new List<Platform>();
+		private List<Genre> m_genreList = new List<Genre>();
+		private List<PlatformGame> m_platformGameList = new List<PlatformGame>();
+		private List<GenreGame> m_genreGameList = new List<GenreGame>();
+
 		public GameScoreSeedBusiness()
 		{
 			_gameScoreSeedRepository = new GameScoreSeedRepository();	
@@ -27,16 +34,19 @@ namespace GameScoreFetchDataJob
 			var gamePagesApiList = new List<GameApiPage>();
 			var count = 1;
 
-			while (!string.IsNullOrEmpty(url) && count <= 1)
+			using (var client = new HttpClient())
 			{
-				var content = await new HttpClient().GetStringAsync(url);
-				var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
+				while (!string.IsNullOrEmpty(url) && count <= 100)
+				{
+					var content = await client.GetStringAsync(url);
+					var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
 
-				gamePagesApiList.Add(gamePageApi);
-				url = gamePageApi.next;
+					gamePagesApiList.Add(gamePageApi);
+					url = gamePageApi.next;
 
-				count++;
-				Console.WriteLine(gamePageApi.next);
+					count++;
+					Console.WriteLine(gamePageApi.next);
+				}
 			}
 
 			return gamePagesApiList;
@@ -46,19 +56,66 @@ namespace GameScoreFetchDataJob
 		{
 			foreach (var gameApiPage in gameApiPagesList)
 			{
-				foreach (var gameApi in gameApiPage.results)
-				{
-					var game = MapTools.MapApiGameToApplicationModel(gameApi);
-					_gameScoreSeedRepository.AddGame(game);
+				CreateBulkData(gameApiPage);
+			}
 
-					var platformList = MapTools.MapApiPlatformsToApplicationModels(gameApi.platforms);
-					_gameScoreSeedRepository.AddPlatformGame(platformList, game);
+			_gameScoreSeedRepository.AddGames(m_gameList);
+			_gameScoreSeedRepository.AddPlatforms(m_platformList);
+			_gameScoreSeedRepository.AddGenres(m_genreList);
+			_gameScoreSeedRepository.AddPlatformGames(m_platformGameList);
+			_gameScoreSeedRepository.AddGenreGames(m_genreGameList);
+		}
 
-					var genreList = MapTools.MapApiGenresToApplicationModels(gameApi.genres);
-					_gameScoreSeedRepository.AddGenreGame(genreList, game);
+		private void CreateBulkData(GameApiPage gameApiPage)
+		{
+			foreach (var gameApi in gameApiPage.results)
+			{
+				var game = UpdateGamesList(gameApi);
 
-					Console.WriteLine($"Processed: {game.Name}");
-				}
+				UpdatePlatformsList(gameApi.platforms, game);
+				UpdateGenresList(gameApi.genres, game);
+			}
+		}
+
+		private Game UpdateGamesList(GameApi gameApi)
+		{
+			var game = MapTools.MapApiGameToApplicationModel(gameApi);
+			m_gameList.Add(game);
+
+			return game;
+		}
+
+		private void UpdatePlatformsList(List<PlatformsApi> platforms, Game game)
+		{
+			var mappedPlatformList = MapTools.MapApiPlatformsToApplicationModels(platforms);
+			foreach (var mappedPlatform in mappedPlatformList)
+			{
+				if (!m_platformList.Any(p => p.OriginalId == mappedPlatform.OriginalId))
+					m_platformList.Add(mappedPlatform);
+
+				m_platformGameList.Add(new PlatformGame {
+					Game = game,
+					GameId = game.Id,
+					Platform = m_platformList.Where(p => p.OriginalId == mappedPlatform.OriginalId).First(),
+					PlatformId = m_platformList.Where(p => p.OriginalId == mappedPlatform.OriginalId).First().Id
+				});
+			}
+		}
+
+		private void UpdateGenresList(List<GenreApi> genres, Game game)
+		{
+			var mappedGenreList = MapTools.MapApiGenresToApplicationModels(genres);
+			foreach (var mappedGenre in mappedGenreList)
+			{
+				if (!m_genreList.Any(p => p.OriginalId == mappedGenre.OriginalId))
+					m_genreList.Add(mappedGenre);
+
+				m_genreGameList.Add(new GenreGame {
+					Game = game,
+					GameId = game.Id,
+					Genre = m_genreList.Where(g => g.OriginalId == mappedGenre.OriginalId).First(),
+					GenreId = m_genreList.Where(g => g.OriginalId == mappedGenre.OriginalId).First().Id
+				});
 			}
 		}
 	}

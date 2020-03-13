@@ -5,8 +5,10 @@ namespace GameScoreFetchDataJob.Repository
 {
 	public interface IGameScoreSeedRepository
 	{
-		public void AddGame(Game game);
-		public void AddPlatformGame(List<Platform> platform, Game game);
-		public void AddGenreGame(List<Genre> genre, Game game);
+		public void AddGames(List<Game> gameList);
+		public void AddPlatforms(List<Platform> platformList);
+		public void AddGenres(List<Genre> genreList);
+		public void AddPlatformGames(List<PlatformGame> platformGameList);
+		public void AddGenreGames(List<GenreGame> genreGameList);
 	}
 }

@@ -14,69 +14,45 @@ namespace GameScoreFetchDataJob.Repository
 			_context = new GameScoreSeedContextFactory().CreateDbContext();
 		}
 
-		public void AddGame(Game game)
+		public void AddGames(List<Game> gameList)
 		{
-			if (!_context.Games.Any(g => g.OriginalId == game.OriginalId))
-			{
-				_context.Games.Add(game);
-				SaveChanges();
-			}
+			_context.Games.AddRange(gameList);
+			SaveChanges();
 		}
 
-		public void AddPlatformGame(List<Platform> platformList, Game game)
+		public void AddPlatforms(List<Platform> platformList)
 		{
-			foreach (var platform in platformList)
-			{
-				if (!_context.Platforms.Any(p => p.OriginalId == platform.OriginalId))
-				{
-					_context.Platforms.Add(platform);
-					SaveChanges();
-				}
-					
-				_context.PlatformGames.Add(new PlatformGame {
-					Game = game,
-					GameId = game.Id,
-					Platform = _context.Platforms.Where(p => p.OriginalId == platform.OriginalId).First(),
-					PlatformId = _context.Platforms.Where(p => p.OriginalId == platform.OriginalId).First().Id
-				});
-				SaveChanges();
-			}
+			_context.Platforms.AddRange(platformList);
+			SaveChanges();
 		}
 
-		public void AddGenreGame(List<Genre> genreList, Game game)
+		public void AddGenres(List<Genre> genreList)
 		{
-			foreach (var genre in genreList)
-			{
-				if (!_context.Genres.Any(g => g.OriginalId == genre.OriginalId))
-				{
-					_context.Genres.Add(genre);
-					SaveChanges();
-				}
-				
-				_context.GenreGames.Add(new GenreGame {
-					Game = game,
-					GameId = game.Id,
-					Genre = _context.Genres.Where(g => g.OriginalId == genre.OriginalId).First(),
-					GenreId = _context.Genres.Where(g => g.OriginalId == genre.OriginalId).First().Id
-				});
-				SaveChanges();
-			}
+			_context.Genres.AddRange(genreList);
+			SaveChanges();
+		}
+
+		public void AddPlatformGames(List<PlatformGame> platformGameList)
+		{
+			_context.PlatformGames.AddRange(platformGameList);
+			SaveChanges();
+		}
+
+		public void AddGenreGames(List<GenreGame> genreGameList)
+		{
+			_context.GenreGames.AddRange(genreGameList);
+			SaveChanges();
 		}
 
 		private void SaveChanges()
 		{
-			using (var transaction = _context.Database.BeginTransaction())
+			try
 			{
-				try
-				{
-					_context.SaveChanges();
-					transaction.Commit();
-				}
-				catch (Exception ex)
-				{
-					transaction.Rollback();
-					Console.WriteLine(ex);
-				}
+				_context.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
 			}
 		}
 	}
