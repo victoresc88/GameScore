@@ -4,14 +4,16 @@ using GameScoreFetchDataJob.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScoreFetchDataJob.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
-    partial class GameScoreSeedContextModelSnapshot : ModelSnapshot
+    [Migration("20200315175125_RemoveScoreEntity")]
+    partial class RemoveScoreEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

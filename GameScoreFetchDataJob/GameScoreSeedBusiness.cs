@@ -36,7 +36,7 @@ namespace GameScoreFetchDataJob
 
 			using (var client = new HttpClient())
 			{
-				while (!string.IsNullOrEmpty(url) && count <= 100)
+				while (!string.IsNullOrEmpty(url) && count <= 1000)
 				{
 					var content = await client.GetStringAsync(url);
 					var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
@@ -59,11 +59,15 @@ namespace GameScoreFetchDataJob
 				CreateBulkData(gameApiPage);
 			}
 
+			Console.WriteLine("Processing....");
+
 			_gameScoreSeedRepository.AddGames(m_gameList);
 			_gameScoreSeedRepository.AddPlatforms(m_platformList);
 			_gameScoreSeedRepository.AddGenres(m_genreList);
 			_gameScoreSeedRepository.AddPlatformGames(m_platformGameList);
 			_gameScoreSeedRepository.AddGenreGames(m_genreGameList);
+
+			Console.WriteLine("Ce finie!");
 		}
 
 		private void CreateBulkData(GameApiPage gameApiPage)

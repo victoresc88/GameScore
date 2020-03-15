@@ -15,6 +15,5 @@ namespace GameScoreFetchDataJob.Models
         public int PlayTime { get; set; }
         public int Metacritic { get; set; }
         public string ImageUrl { get; set; }
-        public Score Score { get; set; }
     }
 }

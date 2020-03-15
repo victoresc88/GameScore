@@ -19,8 +19,7 @@ namespace GameScoreFetchDataJob.Mapping.Profiles
 					 .ForMember(dto => dto.ReleaseDate, opt => opt.ConvertUsing(new StringToDateTimeConverter(), src => src.released))
 					 .ForMember(dto => dto.PlayTime, opt => opt.MapFrom(src => src.playtime))
 					 .ForMember(dto => dto.Metacritic, opt => opt.MapFrom(src => src.metacritic))
-					 .ForMember(dto => dto.ImageUrl, opt => opt.MapFrom(src => src.background_image))
-					 .ForMember(dto => dto.Score, opt => opt.Ignore());
+					 .ForMember(dto => dto.ImageUrl, opt => opt.MapFrom(src => src.background_image));
 			});
 		}
 	}

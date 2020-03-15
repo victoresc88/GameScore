@@ -4,14 +4,16 @@ using GameScoreFetchDataJob.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScoreFetchDataJob.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
-    partial class GameScoreSeedContextModelSnapshot : ModelSnapshot
+    [Migration("20200310002039_UpdatePkAttributesContext")]
+    partial class UpdatePkAttributesContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,12 @@ namespace GameScoreFetchDataJob.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ScoreId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ScoreId");
 
                     b.ToTable("Games");
                 });
@@ -55,15 +62,10 @@ namespace GameScoreFetchDataJob.Migrations
             modelBuilder.Entity("GameScoreFetchDataJob.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OriginalId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -72,16 +74,20 @@ namespace GameScoreFetchDataJob.Migrations
 
             modelBuilder.Entity("GameScoreFetchDataJob.Models.GenreGame", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("GameId", "GenreId");
+                    b.HasIndex("GameId");
 
                     b.HasIndex("GenreId");
 
@@ -91,15 +97,10 @@ namespace GameScoreFetchDataJob.Migrations
             modelBuilder.Entity("GameScoreFetchDataJob.Models.Platform", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OriginalId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -108,20 +109,58 @@ namespace GameScoreFetchDataJob.Migrations
 
             modelBuilder.Entity("GameScoreFetchDataJob.Models.PlatformGame", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<int>("PlatformId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("GameId", "PlatformId");
+                    b.HasIndex("GameId");
 
                     b.HasIndex("PlatformId");
 
                     b.ToTable("PlatformGames");
+                });
+
+            modelBuilder.Entity("GameScoreFetchDataJob.Models.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Gameplay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Graphics")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Narrative")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sound")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Scores");
+                });
+
+            modelBuilder.Entity("GameScoreFetchDataJob.Models.Game", b =>
+                {
+                    b.HasOne("GameScoreFetchDataJob.Models.Score", "Score")
+                        .WithMany()
+                        .HasForeignKey("ScoreId");
                 });
 
             modelBuilder.Entity("GameScoreFetchDataJob.Models.GenreGame", b =>
