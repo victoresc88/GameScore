@@ -15,7 +15,8 @@ namespace GameScoreFetchDataJob
 {
 	public class GameScoreSeedBusiness
 	{
-		private IGameScoreSeedRepository _gameScoreSeedRepository;
+		private IGameScoreSeedRepository m_gameScoreSeedRepository;
+		private MapTools m_mapTools;
 
 		private List<Game> m_gameList = new List<Game>();
 		private List<Platform> m_platformList = new List<Platform>();
@@ -25,7 +26,8 @@ namespace GameScoreFetchDataJob
 
 		public GameScoreSeedBusiness()
 		{
-			_gameScoreSeedRepository = new GameScoreSeedRepository();	
+			m_gameScoreSeedRepository = new GameScoreSeedRepository();
+			m_mapTools = new MapTools();
 		}
 
 		public async Task<List<GameApiPage>> GetGamesAsyncData()
@@ -61,11 +63,11 @@ namespace GameScoreFetchDataJob
 
 			Console.WriteLine("Processing....");
 
-			_gameScoreSeedRepository.AddGames(m_gameList);
-			_gameScoreSeedRepository.AddPlatforms(m_platformList);
-			_gameScoreSeedRepository.AddGenres(m_genreList);
-			_gameScoreSeedRepository.AddPlatformGames(m_platformGameList);
-			_gameScoreSeedRepository.AddGenreGames(m_genreGameList);
+			m_gameScoreSeedRepository.AddGames(m_gameList);
+			m_gameScoreSeedRepository.AddPlatforms(m_platformList);
+			m_gameScoreSeedRepository.AddGenres(m_genreList);
+			m_gameScoreSeedRepository.AddPlatformGames(m_platformGameList);
+			m_gameScoreSeedRepository.AddGenreGames(m_genreGameList);
 
 			Console.WriteLine("Ce finie!");
 		}
@@ -83,7 +85,7 @@ namespace GameScoreFetchDataJob
 
 		private Game UpdateGamesList(GameApi gameApi)
 		{
-			var game = MapTools.MapApiGameToApplicationModel(gameApi);
+			var game = m_mapTools.MapApiGameToApplicationModel(gameApi);
 			m_gameList.Add(game);
 
 			return game;
@@ -91,7 +93,7 @@ namespace GameScoreFetchDataJob
 
 		private void UpdatePlatformsList(List<PlatformsApi> platforms, Game game)
 		{
-			var mappedPlatformList = MapTools.MapApiPlatformsToApplicationModels(platforms);
+			var mappedPlatformList = m_mapTools.MapApiPlatformsToApplicationModels(platforms);
 			foreach (var mappedPlatform in mappedPlatformList)
 			{
 				if (!m_platformList.Any(p => p.OriginalId == mappedPlatform.OriginalId))
@@ -108,7 +110,7 @@ namespace GameScoreFetchDataJob
 
 		private void UpdateGenresList(List<GenreApi> genres, Game game)
 		{
-			var mappedGenreList = MapTools.MapApiGenresToApplicationModels(genres);
+			var mappedGenreList = m_mapTools.MapApiGenresToApplicationModels(genres);
 			foreach (var mappedGenre in mappedGenreList)
 			{
 				if (!m_genreList.Any(p => p.OriginalId == mappedGenre.OriginalId))

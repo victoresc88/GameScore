@@ -6,40 +6,41 @@ using System.Collections.Generic;
 
 namespace GameScoreFetchDataJob.Mapping
 {
-	public static class MapTools
+	public class MapTools
 	{
-		public static Game MapApiGameToApplicationModel(GameApi gameApi)
-		{
-			var mapper = SetMapperConfiguration();
+		private IMapper m_mapper;
 
-			return mapper.Map<GameApi, Game>(gameApi);
+		public MapTools()
+		{
+			m_mapper = SetMapperConfiguration();
 		}
 
-		public static List<Platform> MapApiPlatformsToApplicationModels(List<PlatformsApi> platformApiList)
+		public Game MapApiGameToApplicationModel(GameApi gameApi)
 		{
-			var mapper = SetMapperConfiguration();
+			return m_mapper.Map<GameApi, Game>(gameApi);
+		}
 
+		public List<Platform> MapApiPlatformsToApplicationModels(List<PlatformsApi> platformApiList)
+		{
 			var platformList = new List<Platform>();
 
 			foreach (var platformApi in platformApiList)
-				platformList.Add(mapper.Map<PlatformApi, Platform>(platformApi.platform));
+				platformList.Add(m_mapper.Map<PlatformApi, Platform>(platformApi.platform));
 
 			return platformList;
 		}
 
-		public static List<Genre> MapApiGenresToApplicationModels(List<GenreApi> genreApiList)
+		public List<Genre> MapApiGenresToApplicationModels(List<GenreApi> genreApiList)
 		{
-			var mapper = SetMapperConfiguration();
-
 			var genreList = new List<Genre>();
 
 			foreach (var genreApi in genreApiList)
-				genreList.Add(mapper.Map<GenreApi, Genre>(genreApi));
+				genreList.Add(m_mapper.Map<GenreApi, Genre>(genreApi));
 
 			return genreList;
 		}
 
-		private static IMapper SetMapperConfiguration()
+		private IMapper SetMapperConfiguration()
 		{
 			var config = new MapperConfiguration(cfg =>
 			{
