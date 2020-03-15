@@ -19,10 +19,10 @@ namespace GameScoreFetchDataJob
 		private MapTools m_mapTools;
 
 		private List<Game> m_gameList = new List<Game>();
-		private List<Platform> m_platformList = new List<Platform>();
 		private List<Genre> m_genreList = new List<Genre>();
-		private List<PlatformGame> m_platformGameList = new List<PlatformGame>();
+		private List<Platform> m_platformList = new List<Platform>();
 		private List<GenreGame> m_genreGameList = new List<GenreGame>();
+		private List<PlatformGame> m_platformGameList = new List<PlatformGame>();
 
 		public GameScoreSeedBusiness()
 		{
@@ -69,7 +69,7 @@ namespace GameScoreFetchDataJob
 			m_gameScoreSeedRepository.AddPlatformGames(m_platformGameList);
 			m_gameScoreSeedRepository.AddGenreGames(m_genreGameList);
 
-			Console.WriteLine("Ce finie!");
+			Console.WriteLine("Data saved!");
 		}
 
 		private void CreateBulkData(GameApiPage gameApiPage)
