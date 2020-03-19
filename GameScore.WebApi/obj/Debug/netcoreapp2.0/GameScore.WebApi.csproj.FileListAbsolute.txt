@@ -11,3 +11,5 @@ D:\Projects\GameScore\GameScore.WebApi\obj\Debug\netcoreapp2.0\GameScore.WebApi.
 D:\Projects\GameScore\GameScore.WebApi\obj\Debug\netcoreapp2.0\GameScore.WebApi.AssemblyInfo.cs
 D:\Projects\GameScore\GameScore.WebApi\obj\Debug\netcoreapp2.0\GameScore.WebApi.dll
 D:\Projects\GameScore\GameScore.WebApi\obj\Debug\netcoreapp2.0\GameScore.WebApi.pdb
+C:\Projects\GameScore\GameScore.WebApi\obj\Debug\netcoreapp2.0\GameScore.WebApi.dll
+C:\Projects\GameScore\GameScore.WebApi\obj\Debug\netcoreapp2.0\GameScore.WebApi.pdb

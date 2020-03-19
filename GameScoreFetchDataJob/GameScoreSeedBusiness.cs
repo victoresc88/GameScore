@@ -38,7 +38,7 @@ namespace GameScoreFetchDataJob
 
 			using (var client = new HttpClient())
 			{
-				while (!string.IsNullOrEmpty(url) && count <= 1000)
+				while (!string.IsNullOrEmpty(url) && count <= 10)
 				{
 					var content = await client.GetStringAsync(url);
 					var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
@@ -77,6 +77,7 @@ namespace GameScoreFetchDataJob
 			foreach (var gameApi in gameApiPage.results)
 			{
 				var game = UpdateGamesList(gameApi);
+				Console.WriteLine($"{game.Name} added!");
 
 				UpdatePlatformsList(gameApi.platforms, game);
 				UpdateGenresList(gameApi.genres, game);

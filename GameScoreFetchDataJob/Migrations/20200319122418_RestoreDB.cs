@@ -1,53 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GameScoreFetchDataJob.Migrations
+namespace GameScore.SeedDB.Job.Migrations
 {
-    public partial class UpdatePkAttributes2 : Migration
+    public partial class RestoreDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Genres",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Genres", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Platforms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Platforms", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Scores",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Graphics = table.Column<int>(nullable: false),
-                    Sound = table.Column<int>(nullable: false),
-                    Gameplay = table.Column<int>(nullable: false),
-                    Narrative = table.Column<int>(nullable: false),
-                    Total = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scores", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Games",
                 columns: table => new
@@ -60,32 +19,52 @@ namespace GameScoreFetchDataJob.Migrations
                     ReleaseDate = table.Column<DateTime>(nullable: false),
                     PlayTime = table.Column<int>(nullable: false),
                     Metacritic = table.Column<int>(nullable: false),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    ScoreId = table.Column<int>(nullable: true)
+                    ImageUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Games", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Games_Scores_ScoreId",
-                        column: x => x.ScoreId,
-                        principalTable: "Scores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Genres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OriginalId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genres", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Platforms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OriginalId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Platforms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "GenreGames",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     GameId = table.Column<int>(nullable: false),
-                    GenreId = table.Column<int>(nullable: false)
+                    GenreId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GenreGames", x => x.Id);
+                    table.PrimaryKey("PK_GenreGames", x => new { x.GameId, x.GenreId });
                     table.ForeignKey(
                         name: "FK_GenreGames_Games_GameId",
                         column: x => x.GameId,
@@ -104,14 +83,13 @@ namespace GameScoreFetchDataJob.Migrations
                 name: "PlatformGames",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     GameId = table.Column<int>(nullable: false),
-                    PlatformId = table.Column<int>(nullable: false)
+                    PlatformId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlatformGames", x => x.Id);
+                    table.PrimaryKey("PK_PlatformGames", x => new { x.GameId, x.PlatformId });
                     table.ForeignKey(
                         name: "FK_PlatformGames_Games_GameId",
                         column: x => x.GameId,
@@ -127,24 +105,9 @@ namespace GameScoreFetchDataJob.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Games_ScoreId",
-                table: "Games",
-                column: "ScoreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GenreGames_GameId",
-                table: "GenreGames",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_GenreGames_GenreId",
                 table: "GenreGames",
                 column: "GenreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlatformGames_GameId",
-                table: "PlatformGames",
-                column: "GameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlatformGames_PlatformId",
@@ -168,9 +131,6 @@ namespace GameScoreFetchDataJob.Migrations
 
             migrationBuilder.DropTable(
                 name: "Platforms");
-
-            migrationBuilder.DropTable(
-                name: "Scores");
         }
     }
 }

@@ -6,7 +6,6 @@ namespace GameScoreFetchDataJob.Models
 {
 	public class PlatformGame
 	{
-		public int Id { get; set; }
 		public int GameId { get; set; }
 		public Game Game { get; set; }
 		public int PlatformId { get; set; }

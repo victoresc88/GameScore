@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GameScoreFetchDataJob.Migrations
+namespace GameScore.SeedDB.Job.Migrations
 {
     [DbContext(typeof(GameScoreSeedContext))]
     partial class GameScoreSeedContextModelSnapshot : ModelSnapshot
@@ -78,9 +78,6 @@ namespace GameScoreFetchDataJob.Migrations
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.HasKey("GameId", "GenreId");
 
                     b.HasIndex("GenreId");
@@ -112,9 +109,6 @@ namespace GameScoreFetchDataJob.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PlatformId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("GameId", "PlatformId");
