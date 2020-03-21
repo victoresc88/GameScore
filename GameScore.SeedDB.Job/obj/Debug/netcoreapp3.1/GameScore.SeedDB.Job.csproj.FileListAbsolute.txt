@@ -49,3 +49,5 @@ D:\Projects\GameScore\GameScore.SeedDB.Job\obj\Debug\netcoreapp3.1\GameScore.See
 D:\Projects\GameScore\GameScore.SeedDB.Job\obj\Debug\netcoreapp3.1\GameScore.SeedDB.Job.csproj.CopyComplete
 D:\Projects\GameScore\GameScore.SeedDB.Job\obj\Debug\netcoreapp3.1\GameScore.SeedDB.Job.dll
 D:\Projects\GameScore\GameScore.SeedDB.Job\obj\Debug\netcoreapp3.1\GameScore.SeedDB.Job.pdb
+D:\Projects\GameScore\GameScore.SeedDB.Job\bin\Debug\netcoreapp3.1\GameScore.Models.dll
+D:\Projects\GameScore\GameScore.SeedDB.Job\bin\Debug\netcoreapp3.1\GameScore.Models.pdb
