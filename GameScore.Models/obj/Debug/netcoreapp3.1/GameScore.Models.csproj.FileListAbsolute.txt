@@ -1,0 +1,8 @@
+D:\Projects\GameScore\GameScore.Models\bin\Debug\netcoreapp3.1\GameScore.Models.deps.json
+D:\Projects\GameScore\GameScore.Models\bin\Debug\netcoreapp3.1\GameScore.Models.dll
+D:\Projects\GameScore\GameScore.Models\bin\Debug\netcoreapp3.1\GameScore.Models.pdb
+D:\Projects\GameScore\GameScore.Models\obj\Debug\netcoreapp3.1\GameScore.Models.csprojAssemblyReference.cache
+D:\Projects\GameScore\GameScore.Models\obj\Debug\netcoreapp3.1\GameScore.Models.AssemblyInfoInputs.cache
+D:\Projects\GameScore\GameScore.Models\obj\Debug\netcoreapp3.1\GameScore.Models.AssemblyInfo.cs
+D:\Projects\GameScore\GameScore.Models\obj\Debug\netcoreapp3.1\GameScore.Models.dll
+D:\Projects\GameScore\GameScore.Models\obj\Debug\netcoreapp3.1\GameScore.Models.pdb
