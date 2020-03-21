@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameScoreFetchDataJob.Models
+namespace GameScore.EntityFramework.BL
 {
 	[Table("Genres")]
 	public class Genre
