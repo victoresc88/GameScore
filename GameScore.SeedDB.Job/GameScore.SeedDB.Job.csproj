@@ -29,8 +29,4 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GameScore.Models\GameScore.Models.csproj" />
-  </ItemGroup>
-
 </Project>
