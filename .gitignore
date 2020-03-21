@@ -1,3 +1,5 @@
 .vs/
 GameScore.SeedDB.Job/bin
 GameScore.SeedDB.Job/obj
+GameScore.EntityFramework.BL/bin
+GameScore.EntityFramework.BL/obj
