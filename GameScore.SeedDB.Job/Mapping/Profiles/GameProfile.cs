@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using GameScoreFetchDataJob.Mapping.Converters;
-using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.ApiModels;
+using GameScore.EntityFramework.BL;
+using GameScore.SeedDB.Job.Mapping.Converters;
+using GameScore.SeedDB.Job.Models;
+using GameScore.SeedDB.Job.Models;
 
-namespace GameScoreFetchDataJob.Mapping.Profiles
+namespace GameScore.SeedDB.Job.Mapping.Profiles
 {
 	public class GameProfile : Profile
 	{

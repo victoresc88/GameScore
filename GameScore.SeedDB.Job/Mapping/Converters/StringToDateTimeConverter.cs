@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System;
 
-namespace GameScoreFetchDataJob.Mapping.Converters
+namespace GameScore.SeedDB.Job.Mapping.Converters
 {
     public class StringToDateTimeConverter : IValueConverter<string, DateTime>
     {

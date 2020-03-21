@@ -1,15 +1,17 @@
 ﻿using System.Threading.Tasks;
 
-namespace GameScoreFetchDataJob
+namespace GameScore.SeedDB.Job
 {
 	class Program
 	{
+		private const int NUMBER_OF_PAGES = 5000;
+
 		static async Task Main(string[] args)
 		{
 			var gameScoreSeedBusiness = new GameScoreSeedBusiness();
-			var gamePagesApiList = await gameScoreSeedBusiness.GetGamesAsyncData();
 			
-			gameScoreSeedBusiness.SeedApplicationDatabase(gamePagesApiList);
+			var pageList = await gameScoreSeedBusiness.GetGamesPageList(NUMBER_OF_PAGES);
+			gameScoreSeedBusiness.SeedApplicationModels(pageList);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace GameScoreFetchDataJob.ApiModels
+namespace GameScore.SeedDB.Job.Models
 {
    public class PlatformsApi
    {

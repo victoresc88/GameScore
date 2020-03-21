@@ -1,12 +1,12 @@
 ﻿
-namespace GameScoreFetchDataJob.ApiModels
+namespace GameScore.SeedDB.Job.Models
 {
-   public class Tag
+   public class StoreApi
    {
       public int id { get; set; }
       public string name { get; set; }
       public string slug { get; set; }
-      public string language { get; set; }
+      public string domain { get; set; }
       public int games_count { get; set; }
       public string image_background { get; set; }
    }

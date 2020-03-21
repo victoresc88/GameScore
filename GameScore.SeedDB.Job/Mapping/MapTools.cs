@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using GameScoreFetchDataJob.ApiModels;
-using GameScoreFetchDataJob.Mapping.Profiles;
-using GameScoreFetchDataJob.Models;
+using GameScore.SeedDB.Job.Models;
+using GameScore.SeedDB.Job.Mapping.Profiles;
 using System.Collections.Generic;
+using GameScore.EntityFramework.BL;
 
-namespace GameScoreFetchDataJob.Mapping
+namespace GameScore.SeedDB.Job.Mapping
 {
 	public class MapTools
 	{
@@ -15,12 +15,12 @@ namespace GameScoreFetchDataJob.Mapping
 			m_mapper = SetMapperConfiguration();
 		}
 
-		public Game MapApiGameToApplicationModel(GameApi gameApi)
+		public Game MapApiGame(GameApi gameApi)
 		{
 			return m_mapper.Map<GameApi, Game>(gameApi);
 		}
 
-		public List<Platform> MapApiPlatformsToApplicationModels(List<PlatformsApi> platformApiList)
+		public List<Platform> MapApiPlatforms(List<PlatformsApi> platformApiList)
 		{
 			var platformList = new List<Platform>();
 
@@ -30,7 +30,7 @@ namespace GameScoreFetchDataJob.Mapping
 			return platformList;
 		}
 
-		public List<Genre> MapApiGenresToApplicationModels(List<GenreApi> genreApiList)
+		public List<Genre> MapApiGenres(List<GenreApi> genreApiList)
 		{
 			var genreList = new List<Genre>();
 

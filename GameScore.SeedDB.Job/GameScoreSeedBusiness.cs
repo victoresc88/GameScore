@@ -3,19 +3,17 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
-using GameScoreFetchDataJob.Models;
-using GameScoreFetchDataJob.Mapping;
-using GameScoreFetchDataJob.Repository;
-using GameScoreFetchDataJob.ApiModels;
-
+using GameScore.SeedDB.Job.Mapping;
+using GameScore.SeedDB.Job.Models;
+using GameScore.EntityFramework.BL;
 using Newtonsoft.Json;
 
-namespace GameScoreFetchDataJob
+namespace GameScore.SeedDB.Job
 {
 	public class GameScoreSeedBusiness
 	{
-		private IGameScoreSeedRepository m_gameScoreSeedRepository;
+		private string URL = "https://api.rawg.io/api/games?page=1";
+
 		private MapTools m_mapTools;
 
 		private List<Game> m_gameList = new List<Game>();
@@ -26,102 +24,82 @@ namespace GameScoreFetchDataJob
 
 		public GameScoreSeedBusiness()
 		{
-			m_gameScoreSeedRepository = new GameScoreSeedRepository();
 			m_mapTools = new MapTools();
 		}
 
-		public async Task<List<GameApiPage>> GetGamesAsyncData()
+		public async Task<List<GameApiPage>> GetGamesPageList(int numberOfPages)
 		{
-			var url = "https://api.rawg.io/api/games?page=1";
-			var gamePagesApiList = new List<GameApiPage>();
 			var count = 1;
+			var pageList = new List<GameApiPage>();
 
 			using (var client = new HttpClient())
 			{
-				while (!string.IsNullOrEmpty(url) && count <= 10)
+				while (!string.IsNullOrEmpty(URL) && count <= numberOfPages)
 				{
-					var content = await client.GetStringAsync(url);
-					var gamePageApi = JsonConvert.DeserializeObject<GameApiPage>(content);
+					var content = await client.GetStringAsync(URL);
+					var page = JsonConvert.DeserializeObject<GameApiPage>(content);
 
-					gamePagesApiList.Add(gamePageApi);
-					url = gamePageApi.next;
+					pageList.Add(page);
+					URL = page.next;
 
 					count++;
-					Console.WriteLine(gamePageApi.next);
+					Console.WriteLine(page.next);
 				}
 			}
 
-			return gamePagesApiList;
+			return pageList;
 		}
 
-		public void SeedApplicationDatabase(List<GameApiPage> gameApiPagesList)
+		public void SeedApplicationModels(List<GameApiPage> pageList)
 		{
-			foreach (var gameApiPage in gameApiPagesList)
+			foreach (var page in pageList)
 			{
-				CreateBulkData(gameApiPage);
+				foreach (var apiGame in page.results)
+				{
+					AddGame(m_mapTools.MapApiGame(apiGame));
+					AddPlatforms(m_mapTools.MapApiPlatforms(apiGame.platforms), m_gameList.Last());
+					AddGenres(m_mapTools.MapApiGenres(apiGame.genres), m_gameList.Last());
+
+					Console.WriteLine($"{m_gameList.Last().Name} added!");
+				}
 			}
 
-			Console.WriteLine("Processing....");
-
-			m_gameScoreSeedRepository.AddGames(m_gameList);
-			m_gameScoreSeedRepository.AddPlatforms(m_platformList);
-			m_gameScoreSeedRepository.AddGenres(m_genreList);
-			m_gameScoreSeedRepository.AddPlatformGames(m_platformGameList);
-			m_gameScoreSeedRepository.AddGenreGames(m_genreGameList);
-
-			Console.WriteLine("Data saved!");
+			// Once everything mapped, call local api to seed DB
 		}
 
-		private void CreateBulkData(GameApiPage gameApiPage)
-		{
-			foreach (var gameApi in gameApiPage.results)
-			{
-				var game = UpdateGamesList(gameApi);
-				Console.WriteLine($"{game.Name} added!");
-
-				UpdatePlatformsList(gameApi.platforms, game);
-				UpdateGenresList(gameApi.genres, game);
-			}
-		}
-
-		private Game UpdateGamesList(GameApi gameApi)
-		{
-			var game = m_mapTools.MapApiGameToApplicationModel(gameApi);
+		private void AddGame(Game game)
+		{	
 			m_gameList.Add(game);
-
-			return game;
 		}
 
-		private void UpdatePlatformsList(List<PlatformsApi> platforms, Game game)
+		private void AddPlatforms(List<Platform> platformList, Game game)
 		{
-			var mappedPlatformList = m_mapTools.MapApiPlatformsToApplicationModels(platforms);
-			foreach (var mappedPlatform in mappedPlatformList)
+			foreach (var platform in platformList)
 			{
-				if (!m_platformList.Any(p => p.OriginalId == mappedPlatform.OriginalId))
-					m_platformList.Add(mappedPlatform);
+				if (!m_platformList.Any(p => p.OriginalId == platform.OriginalId))
+					m_platformList.Add(platform);
 
 				m_platformGameList.Add(new PlatformGame {
 					Game = game,
 					GameId = game.Id,
-					Platform = m_platformList.Where(p => p.OriginalId == mappedPlatform.OriginalId).First(),
-					PlatformId = m_platformList.Where(p => p.OriginalId == mappedPlatform.OriginalId).First().Id
+					Platform = m_platformList.Where(p => p.OriginalId == platform.OriginalId).First(),
+					PlatformId = m_platformList.Where(p => p.OriginalId == platform.OriginalId).First().Id
 				});
 			}
 		}
 
-		private void UpdateGenresList(List<GenreApi> genres, Game game)
+		private void AddGenres(List<Genre> genreList, Game game)
 		{
-			var mappedGenreList = m_mapTools.MapApiGenresToApplicationModels(genres);
-			foreach (var mappedGenre in mappedGenreList)
+			foreach (var genre in genreList)
 			{
-				if (!m_genreList.Any(p => p.OriginalId == mappedGenre.OriginalId))
-					m_genreList.Add(mappedGenre);
+				if (!m_genreList.Any(p => p.OriginalId == genre.OriginalId))
+					m_genreList.Add(genre);
 
 				m_genreGameList.Add(new GenreGame {
 					Game = game,
 					GameId = game.Id,
-					Genre = m_genreList.Where(g => g.OriginalId == mappedGenre.OriginalId).First(),
-					GenreId = m_genreList.Where(g => g.OriginalId == mappedGenre.OriginalId).First().Id
+					Genre = m_genreList.Where(g => g.OriginalId == genre.OriginalId).First(),
+					GenreId = m_genreList.Where(g => g.OriginalId == genre.OriginalId).First().Id
 				});
 			}
 		}

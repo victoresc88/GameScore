@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace GameScoreFetchDataJob.ApiModels
+namespace GameScore.SeedDB.Job.Models
 {
 	public class Year
 	{
