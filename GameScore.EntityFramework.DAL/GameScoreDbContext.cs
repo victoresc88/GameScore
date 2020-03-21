@@ -15,5 +15,14 @@ namespace GameScore.EntityFramework.DAL
         public GameScoreDbContext(DbContextOptions<GameScoreDbContext> options) : base(options)
         {        
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PlatformGame>()
+                .HasKey(x => new { x.GameId, x.PlatformId });
+
+            modelBuilder.Entity<GenreGame>()
+                .HasKey(x => new { x.GameId, x.GenreId });
+        }
     }
 }
