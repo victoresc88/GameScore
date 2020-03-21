@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameScore.EntityFramework.B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameScore.EntityFramework.DAL", "GameScore.EntityFramework.DAL\GameScore.EntityFramework.DAL.csproj", "{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameScore.API", "GameScore.API\GameScore.API.csproj", "{6266FABF-E04B-4228-84CB-CE8DE58F424F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

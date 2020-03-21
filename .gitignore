@@ -5,3 +5,5 @@ GameScore.EntityFramework.BL/bin
 GameScore.EntityFramework.BL/obj
 GameScore.EntityFramework.DAL/bin
 GameScore.EntityFramework.DAL/obj
+GameScore.API/bin
+GameScore.API/obj
