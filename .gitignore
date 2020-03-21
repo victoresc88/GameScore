@@ -3,3 +3,5 @@ GameScore.SeedDB.Job/bin
 GameScore.SeedDB.Job/obj
 GameScore.EntityFramework.BL/bin
 GameScore.EntityFramework.BL/obj
+GameScore.EntityFramework.DAL/bin
+GameScore.EntityFramework.DAL/obj
