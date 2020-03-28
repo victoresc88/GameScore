@@ -1,17 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GameScore.SeedDB.Job
 {
 	class Program
 	{
-		private const int NUMBER_OF_PAGES = 1000;
-
 		static async Task Main(string[] args)
 		{
-			var gameScoreSeedBusiness = new GameScoreSeedBusiness();
+			var xdoc = XDocument.Load($"{AppDomain.CurrentDomain.BaseDirectory}/seed_config.xml");
+			var startPage = Int32.Parse(xdoc.Root.Element("StartPage").Value);
+			var numberOfPages = Int32.Parse(xdoc.Root.Element("PageCounter").Value);
+
+			var gameScoreSeedBusiness = new GameScoreSeedBusiness(startPage, numberOfPages);
+			var pageList = await gameScoreSeedBusiness.GetGamesPageList();
 			
-			var pageList = await gameScoreSeedBusiness.GetGamesPageList(NUMBER_OF_PAGES);
 			gameScoreSeedBusiness.SeedApplicationModels(pageList);
+			gameScoreSeedBusiness.SeedData();
+
+			xdoc.Root.Element("StartPage").SetValue(startPage + 500);
+			xdoc.Save($"{AppDomain.CurrentDomain.BaseDirectory}/seed_config.xml");
 		}
 	}
 }

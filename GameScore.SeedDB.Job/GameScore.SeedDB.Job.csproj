@@ -19,4 +19,10 @@
     <ProjectReference Include="..\GameScore.EntityFramework.DAL\GameScore.EntityFramework.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="seed_config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

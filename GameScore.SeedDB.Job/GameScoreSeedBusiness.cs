@@ -13,8 +13,8 @@ namespace GameScore.SeedDB.Job
 {
 	public class GameScoreSeedBusiness
 	{
-		private string URL = "https://api.rawg.io/api/games?page=1";
-
+		private int NUMBER_OF_PAGES;
+		private string m_url;
 		private MapTools m_mapTools;
 
 		private List<Game> m_gameList = new List<Game>();
@@ -23,28 +23,30 @@ namespace GameScore.SeedDB.Job
 		private List<GenreGame> m_genreGameList = new List<GenreGame>();
 		private List<PlatformGame> m_platformGameList = new List<PlatformGame>();
 
-		public GameScoreSeedBusiness()
+		public GameScoreSeedBusiness(int startPage, int numberOfPages)
 		{
+			NUMBER_OF_PAGES = numberOfPages;
+			m_url = $"https://api.rawg.io/api/games?page={startPage}";
 			m_mapTools = new MapTools();
 		}
 
-		public async Task<List<GameApiPage>> GetGamesPageList(int numberOfPages)
+		public async Task<List<GameApiPage>> GetGamesPageList()
 		{
-			var count = 1;
 			var pageList = new List<GameApiPage>();
 
 			using (var client = new HttpClient())
 			{
-				while (!string.IsNullOrEmpty(URL) && count <= numberOfPages)
+				for (int i = 0; i < NUMBER_OF_PAGES; i++)
 				{
-					var content = await client.GetStringAsync(URL);
-					var page = JsonConvert.DeserializeObject<GameApiPage>(content);
+					if (!string.IsNullOrEmpty(m_url))
+					{
+						var content = await client.GetStringAsync(m_url);
+						var page = JsonConvert.DeserializeObject<GameApiPage>(content);
+						pageList.Add(page);
 
-					pageList.Add(page);
-					URL = page.next;
-
-					count++;
-					Console.WriteLine(page.next);
+						m_url = page.next;
+						Console.WriteLine(page.next);
+					}
 				}
 			}
 
@@ -63,10 +65,7 @@ namespace GameScore.SeedDB.Job
 
 					Console.WriteLine($"{m_gameList.Last().Name} added to list!");
 				}
-			}
-
-			SeedData();
-			
+			}	
 		}
 
 		private void AddGame(Game game)
@@ -106,7 +105,7 @@ namespace GameScore.SeedDB.Job
 			}
 		}
 
-		private void SeedData()
+		public void SeedData()
 		{
 			var context = new GameScoreDbContextFactory().CreateDbContext();
 
