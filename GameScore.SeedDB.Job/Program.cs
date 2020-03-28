@@ -4,7 +4,7 @@ namespace GameScore.SeedDB.Job
 {
 	class Program
 	{
-		private const int NUMBER_OF_PAGES = 5000;
+		private const int NUMBER_OF_PAGES = 1000;
 
 		static async Task Main(string[] args)
 		{

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameScore.EntityFramework.BL\GameScore.EntityFramework.BL.csproj" />
+    <ProjectReference Include="..\GameScore.EntityFramework.DAL\GameScore.EntityFramework.DAL.csproj" />
   </ItemGroup>
 
 </Project>

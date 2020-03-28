@@ -7,6 +7,7 @@ using GameScore.SeedDB.Job.Mapping;
 using GameScore.SeedDB.Job.Models;
 using GameScore.EntityFramework.BL;
 using Newtonsoft.Json;
+using GameScore.EntityFramework.DAL;
 
 namespace GameScore.SeedDB.Job
 {
@@ -60,11 +61,12 @@ namespace GameScore.SeedDB.Job
 					AddPlatforms(m_mapTools.MapApiPlatforms(apiGame.platforms), m_gameList.Last());
 					AddGenres(m_mapTools.MapApiGenres(apiGame.genres), m_gameList.Last());
 
-					Console.WriteLine($"{m_gameList.Last().Name} added!");
+					Console.WriteLine($"{m_gameList.Last().Name} added to list!");
 				}
 			}
 
-			// Once everything mapped, call local api to seed DB
+			PostSeedData();
+			
 		}
 
 		private void AddGame(Game game)
@@ -102,6 +104,22 @@ namespace GameScore.SeedDB.Job
 					GenreId = m_genreList.Where(g => g.OriginalId == genre.OriginalId).First().Id
 				});
 			}
+		}
+
+		private void PostSeedData()
+		{
+			var context = new GameScoreDbContextFactory().CreateDbContext();
+
+			context.Games.AddRange(m_gameList);
+			context.SaveChanges();
+
+			context.Genres.AddRange(m_genreList);
+			context.GenreGames.AddRange(m_genreGameList);
+			context.SaveChanges();
+
+			context.Platforms.AddRange(m_platformList);
+			context.PlatformGames.AddRange(m_platformGameList);
+			context.SaveChanges();
 		}
 	}
 }
