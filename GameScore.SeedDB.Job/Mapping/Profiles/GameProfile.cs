@@ -2,7 +2,6 @@
 using GameScore.EntityFramework.BL;
 using GameScore.SeedDB.Job.Mapping.Converters;
 using GameScore.SeedDB.Job.Models;
-using GameScore.SeedDB.Job.Models;
 
 namespace GameScore.SeedDB.Job.Mapping.Profiles
 {

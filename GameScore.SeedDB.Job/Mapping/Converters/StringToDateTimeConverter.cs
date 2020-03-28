@@ -9,15 +9,8 @@ namespace GameScore.SeedDB.Job.Mapping.Converters
         {
             DateTime dateTime;
 
-            if (string.IsNullOrEmpty(sourceMember))
-            {
-                return default(DateTime);
-            }
-
-            if (DateTime.TryParse(sourceMember, out dateTime))
-            {
-                return dateTime;
-            }
+            if (string.IsNullOrEmpty(sourceMember)) return default(DateTime);
+            if (DateTime.TryParse(sourceMember, out dateTime)) return dateTime;
 
             return default(DateTime);
         }
