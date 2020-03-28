@@ -65,7 +65,7 @@ namespace GameScore.SeedDB.Job
 				}
 			}
 
-			PostSeedData();
+			SeedData();
 			
 		}
 
@@ -106,7 +106,7 @@ namespace GameScore.SeedDB.Job
 			}
 		}
 
-		private void PostSeedData()
+		private void SeedData()
 		{
 			var context = new GameScoreDbContextFactory().CreateDbContext();
 
