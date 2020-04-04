@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameScore.EntityFramework.BL
+namespace GameScore.Entities
 {
     [Table("Games")]
     public class Game

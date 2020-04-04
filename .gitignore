@@ -1,10 +1,10 @@
 .vs/
 GameScore.SeedDB.Job/bin
 GameScore.SeedDB.Job/obj
-GameScore.EntityFramework.BL/bin
-GameScore.EntityFramework.BL/obj
-GameScore.EntityFramework.DAL/bin
-GameScore.EntityFramework.DAL/obj
+GameScore.Entities/bin
+GameScore.Entities/obj
+GameScore.DAL/bin
+GameScore.DAL/obj
 GameScore.API/bin
 GameScore.API/obj
 GameScore.UI/bin

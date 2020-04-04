@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GameScore.EntityFramework.BL;
+using GameScore.Entities;
 using GameScore.SeedDB.Job.Models;
 
 namespace GameScore.SeedDB.Job.Mapping.Profiles

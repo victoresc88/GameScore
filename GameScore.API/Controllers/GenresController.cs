@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GameScore.EntityFramework.BL;
-using GameScore.EntityFramework.DAL;
+using GameScore.Entities;
+using GameScore.DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

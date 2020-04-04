@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameScore.SeedDB.Job", "GameScore.SeedDB.Job\GameScore.SeedDB.Job.csproj", "{AC0BE565-FA39-4FCA-AA2B-C95FC76BA56C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameScore.EntityFramework.BL", "GameScore.EntityFramework.BL\GameScore.EntityFramework.BL.csproj", "{C32ED0F3-2CC1-4423-BCDF-C4FE85D70D63}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameScore.EntityFramework.DAL", "GameScore.EntityFramework.DAL\GameScore.EntityFramework.DAL.csproj", "{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameScore.API", "GameScore.API\GameScore.API.csproj", "{6266FABF-E04B-4228-84CB-CE8DE58F424F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameScore.UI", "GameScore.UI\GameScore.UI.csproj", "{15AB8411-DFBA-4FA2-B634-8F57DEA54DF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameScore.DAL", "GameScore.DAL\GameScore.DAL.csproj", "{BA271FDC-2400-42D1-8E08-2F1CF0BF6118}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameScore.Entities", "GameScore.Entities\GameScore.Entities.csproj", "{9011F121-2D33-4F9F-9C22-ACB38F14E6CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,6 @@ Global
 		{AC0BE565-FA39-4FCA-AA2B-C95FC76BA56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC0BE565-FA39-4FCA-AA2B-C95FC76BA56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC0BE565-FA39-4FCA-AA2B-C95FC76BA56C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C32ED0F3-2CC1-4423-BCDF-C4FE85D70D63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C32ED0F3-2CC1-4423-BCDF-C4FE85D70D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C32ED0F3-2CC1-4423-BCDF-C4FE85D70D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C32ED0F3-2CC1-4423-BCDF-C4FE85D70D63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BB5CCF4-424B-4713-A2C1-2CEE61E79EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6266FABF-E04B-4228-84CB-CE8DE58F424F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +31,14 @@ Global
 		{15AB8411-DFBA-4FA2-B634-8F57DEA54DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15AB8411-DFBA-4FA2-B634-8F57DEA54DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15AB8411-DFBA-4FA2-B634-8F57DEA54DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA271FDC-2400-42D1-8E08-2F1CF0BF6118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA271FDC-2400-42D1-8E08-2F1CF0BF6118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA271FDC-2400-42D1-8E08-2F1CF0BF6118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA271FDC-2400-42D1-8E08-2F1CF0BF6118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9011F121-2D33-4F9F-9C22-ACB38F14E6CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9011F121-2D33-4F9F-9C22-ACB38F14E6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9011F121-2D33-4F9F-9C22-ACB38F14E6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9011F121-2D33-4F9F-9C22-ACB38F14E6CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

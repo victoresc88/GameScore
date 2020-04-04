@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameScore.EntityFramework.BL
+namespace GameScore.Entities
 {
 	public class GenreGame
 	{

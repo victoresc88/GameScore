@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using GameScore.SeedDB.Job.Mapping;
 using GameScore.SeedDB.Job.Models;
-using GameScore.EntityFramework.BL;
+using GameScore.Entities;
 using Newtonsoft.Json;
-using GameScore.EntityFramework.DAL;
+using GameScore.DAL;
 
 namespace GameScore.SeedDB.Job
 {

@@ -1,8 +1,8 @@
 ﻿
-using GameScore.EntityFramework.BL;
+using GameScore.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameScore.EntityFramework.DAL
+namespace GameScore.DAL
 {
     public class GameScoreDbContext : DbContext
     {

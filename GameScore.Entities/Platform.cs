@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameScore.EntityFramework.BL
+namespace GameScore.Entities
 {
-	[Table("Genres")]
-	public class Genre
+	[Table("Platforms")]
+	public class Platform
 	{
 		public int Id { get; set; }
 		public int OriginalId { get; set; }

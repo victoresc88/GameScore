@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GameScore.EntityFramework.DAL.Migrations
+namespace GameScore.DAL.Migrations
 {
     public partial class InitialSetup : Migration
     {

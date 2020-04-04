@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameScore.EntityFramework.BL\GameScore.EntityFramework.BL.csproj" />
-    <ProjectReference Include="..\GameScore.EntityFramework.DAL\GameScore.EntityFramework.DAL.csproj" />
+    <ProjectReference Include="..\GameScore.DAL\GameScore.DAL.csproj" />
+    <ProjectReference Include="..\GameScore.Entities\GameScore.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

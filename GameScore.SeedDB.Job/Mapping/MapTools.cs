@@ -2,7 +2,7 @@
 using GameScore.SeedDB.Job.Models;
 using GameScore.SeedDB.Job.Mapping.Profiles;
 using System.Collections.Generic;
-using GameScore.EntityFramework.BL;
+using GameScore.Entities;
 
 namespace GameScore.SeedDB.Job.Mapping
 {

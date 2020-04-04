@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace GameScore.EntityFramework.DAL
+namespace GameScore.DAL
 {
 	public class GameScoreDbContextFactory : IDesignTimeDbContextFactory<GameScoreDbContext>
 	{

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameScore.EntityFramework.DAL\GameScore.EntityFramework.DAL.csproj" />
+    <ProjectReference Include="..\GameScore.DAL\GameScore.DAL.csproj" />
   </ItemGroup>
 
 
