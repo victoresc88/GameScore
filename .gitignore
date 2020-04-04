@@ -1,6 +1,6 @@
 .vs/
-GameScore.SeedDB.Job/bin
-GameScore.SeedDB.Job/obj
+GameScore.SeedDbJob/bin
+GameScore.SeedDbJob/obj
 GameScore.Entities/bin
 GameScore.Entities/obj
 GameScore.DAL/bin
