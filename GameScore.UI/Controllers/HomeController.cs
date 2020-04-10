@@ -26,7 +26,6 @@ namespace GameScore.UI.Controllers
         public IActionResult Index()
         {
             var gameList = _mapper.Map<IEnumerable<GameViewModel>>(_homeBusiness.GetAllGames().Take(30));
-            Session["Customers"] = customers.ToDictionary(x => custIndex++, x => x);
 
             return View(gameList);
         }
