@@ -4,11 +4,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container">
+<div class="row">
     @foreach (var game in Model)
     {
-       <div class="row">
-           <img style="height: 400px; width: 450px;" src="@game.ImageUrl"/>
-       </div>
+        <div class="card" style="width: 18rem; margin:5px">
+            <img class="card-img-top" src="@game.ImageUrl" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">@game.Name</p>
+            </div>
+        </div>
     }
 </div>

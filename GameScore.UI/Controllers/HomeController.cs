@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GameScore.UI.Models;
-using GameScore.BL;
 using AutoMapper;
 using GameScore.UI.ViewModels;
+using GameScore.BL.Interfaces;
 
 namespace GameScore.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HomeBusiness _homeBusiness;
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeBusiness _homeBusiness;
         private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, IMapper mapper)
+        public HomeController(IMapper mapper, IHomeBusiness homeBusiness)
         {
-            _logger = logger;
             _mapper = mapper;
-            _homeBusiness = new HomeBusiness();
+            _homeBusiness = homeBusiness;
         }
 
         public IActionResult Index()
         {
-            var gameList = _mapper.Map<IEnumerable<GameViewModel>>(_homeBusiness.GetAllGames().Take(20));
+            var gameList = _mapper.Map<IEnumerable<GameViewModel>>(_homeBusiness.GetAllGames().Take(30));
+            Session["Customers"] = customers.ToDictionary(x => custIndex++, x => x);
 
             return View(gameList);
         }

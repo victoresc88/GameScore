@@ -1,4 +1,5 @@
-﻿using GameScore.DAL;
+﻿using GameScore.BL.Interfaces;
+using GameScore.DAL;
 using GameScore.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 
 namespace GameScore.BL
 {
-    public class HomeBusiness
+    public class HomeBusiness : IHomeBusiness
     {
         private readonly GameScoreDbContext _context;
 
@@ -15,9 +16,9 @@ namespace GameScore.BL
             _context = new GameScoreDbContextFactory().CreateDbContext();
         }
 
-        public List<Game> GetAllGames()
+        public IEnumerable<Game> GetAllGames()
         {
-            return _context.Games.ToList();
+            return _context.Games.OrderByDescending(g => g.ReleaseDate);
         }
     }
 }
