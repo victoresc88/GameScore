@@ -38,7 +38,8 @@ namespace GameScore.UI
             services.AddScoped<IHomeBusiness, HomeBusiness>();
 
             services.AddAutoMapper(typeof(Startup));            
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 

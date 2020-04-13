@@ -1,17 +1,21 @@
-﻿@model List<GameScore.UI.ViewModels.GameViewModel>
+﻿
+@using GameScore.UI.ViewModels
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-    @foreach (var game in Model)
-    {
-        <div class="card" style="width: 18rem; margin:5px">
-            <img class="card-img-top" src="@game.ImageUrl" alt="Card image cap">
-            <div class="card-body">
-                <p class="card-text">@game.Name</p>
-            </div>
-        </div>
-    }
+<div id="gameList" class="row">
+    <ul class="infinite-scroll">
+        <partial name="_GamesPage" model="(ViewBag.Games as Dictionary<int, GameViewModel>)" />
+    </ul>
 </div>
+
+@section scripts{
+    <script src="~/js/Home/infiniteScroll.js"></script>
+    <script type="text/javascript">
+        var moreRowsUrl = '@Url.Action("RenderGamesPage", "Home")';
+
+        $(window).scroll(ulScrollHandler);
+    </script>
+}
