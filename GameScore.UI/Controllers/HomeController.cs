@@ -20,13 +20,13 @@ namespace GameScore.UI.Controllers
 
         private readonly IHomeBusiness _homeBusiness;
         private readonly IMapper _mapper;
-        private readonly MemoryCache _cache;
+        private readonly IMemoryCache _cache;
 
-        public HomeController(IMapper mapper, IHomeBusiness homeBusiness)
+        public HomeController(IMapper mapper, IHomeBusiness homeBusiness, IMemoryCache cache)
         {
             _mapper = mapper;
             _homeBusiness = homeBusiness;
-            _cache = new MemoryCache(new MemoryCacheOptions());
+            _cache = cache;
 
             ViewBag.RecordsPerPage = RECORDS_PER_PAGE;
         }

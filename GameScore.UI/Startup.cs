@@ -40,6 +40,7 @@ namespace GameScore.UI
             services.AddAutoMapper(typeof(Startup));            
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+            services.AddMemoryCache();
             services.AddRazorPages();
         }
 
