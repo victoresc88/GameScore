@@ -26,7 +26,7 @@ namespace GameScore.UI.Controllers
 
         public IActionResult Index()
         {
-            SetInfiniteScrollingCacheData();
+            SetAllItemsInCache();
 
             var pageNumber = 0;
             var gamesByIndex = GetItemsForPage(pageNumber);
@@ -34,10 +34,10 @@ namespace GameScore.UI.Controllers
             return View("Index", gamesByIndex);
         }
 
+        [HttpGet]
         public IActionResult RenderGamesPage(int? pageNumber)
         {
             pageNumber = pageNumber ?? 0;
-
             var gamesByIndex = GetItemsForPage(pageNumber.Value);
 
             return PartialView("_GamesPage", gamesByIndex);
@@ -55,7 +55,7 @@ namespace GameScore.UI.Controllers
                 .ToDictionary(x => x.Key, x => x.Value);
         }
 
-        private void SetInfiniteScrollingCacheData()
+        private void SetAllItemsInCache()
         {
             var gameIndex = 1;
 

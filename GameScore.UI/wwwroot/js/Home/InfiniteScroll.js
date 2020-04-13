@@ -5,6 +5,7 @@
 var ulScrollHandler = function () {
     if (hasReachedEndOfInfiniteScroll == false &&
         ($(window).scrollTop() + 2 >= $(document).height() - $(window).height())) {
+        
         loadMoreToInfiniteScrollUl(moreRowsUrl);
     }
 }
@@ -17,7 +18,7 @@ function loadMoreToInfiniteScrollUl(loadMoreRowsUrl) {
         $.ajax({
             type: 'GET',
             url: loadMoreRowsUrl,
-            data: "pageNum=" + page,
+            data: "pageNumber=" + page,
             success: function (data, textstatus) {
                 if (data != '') {
                     $("div.infinite-scroll").append(data);
