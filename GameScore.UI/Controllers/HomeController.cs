@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using GameScore.UI.Models;
 using AutoMapper;
 using GameScore.UI.ViewModels;
 using GameScore.BL.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
 
 namespace GameScore.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public const int RECORDS_PER_PAGE = 5;
+        public const int ITEMS_PER_PAGE = 30;
 
         private readonly IHomeBusiness _homeBusiness;
         private readonly IMapper _mapper;
@@ -24,65 +19,54 @@ namespace GameScore.UI.Controllers
 
         public HomeController(IMapper mapper, IHomeBusiness homeBusiness, IMemoryCache cache)
         {
-            _mapper = mapper;
             _homeBusiness = homeBusiness;
+            _mapper = mapper;
             _cache = cache;
-
-            ViewBag.RecordsPerPage = RECORDS_PER_PAGE;
         }
 
-        public IActionResult Index(int? pageNum)
+        public IActionResult Index()
         {
-            pageNum = pageNum ?? 0;
-            ViewBag.IsEndOfRecords = false;
-
             SetInfiniteScrollingCacheData();
-            ViewBag.Games = GetRecordsForPage(pageNum.Value);
+
+            var pageNumber = 0;
+            var gamesByIndex = GetItemsForPage(pageNumber);
             
-            return View("Index");
+            return View("Index", gamesByIndex);
         }
 
-        public IActionResult RenderGamesPage(int? pageNum)
+        public IActionResult RenderGamesPage(int? pageNumber)
         {
-            pageNum = pageNum ?? 0;
-            ViewBag.IsEndOfRecords = false;
+            pageNumber = pageNumber ?? 0;
 
-            var games = GetRecordsForPage(pageNum.Value);
+            var gamesByIndex = GetItemsForPage(pageNumber.Value);
 
-            return PartialView("_GamesPage", games);
+            return PartialView("_GamesPage", gamesByIndex);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private Dictionary<int, GameViewModel> GetItemsForPage(int pageNumber)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            var gamesByIndex = (_cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>);
 
-        public Dictionary<int, GameViewModel> GetRecordsForPage(int pageNum)
-        {
-            Dictionary<int, GameViewModel> games = (_cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>);
+            var indexFrom = pageNumber * ITEMS_PER_PAGE;
+            var indexTo = indexFrom + ITEMS_PER_PAGE;
 
-            int from = (pageNum * RECORDS_PER_PAGE);
-            int to = from + RECORDS_PER_PAGE;
-
-            return games
-                .Where(x => x.Key > from && x.Key <= to)
-                .OrderBy(x => x.Key)
+            return gamesByIndex
+                .Where(x => x.Key > indexFrom && x.Key <= indexTo)
                 .ToDictionary(x => x.Key, x => x.Value);
         }
 
         private void SetInfiniteScrollingCacheData()
         {
-            int custIndex = 1;
+            var gameIndex = 1;
 
-            var gameModelList = _homeBusiness.GetAllGames();
-            var gameViewModelList = _mapper.Map<IEnumerable<GameViewModel>>(gameModelList);
-            var gameDictionaryEntry = gameViewModelList.ToDictionary(g => custIndex++, g => g);         
+            var listOfGames = _homeBusiness.GetAllGames();
+            var gamesByIndex = _mapper.Map<IEnumerable<GameViewModel>>(listOfGames)
+                                    .ToDictionary(x => gameIndex++, x => x);         
 
             var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(120));
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
 
-            _cache.Set("_GamesEntry", gameDictionaryEntry, cacheEntryOptions);
+            _cache.Set("_GamesEntry", gamesByIndex, cacheEntryOptions);
         }
     }
 }

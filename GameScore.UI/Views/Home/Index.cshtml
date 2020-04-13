@@ -1,14 +1,12 @@
 ﻿
-@using GameScore.UI.ViewModels
+@model Dictionary<int, GameScore.UI.ViewModels.GameViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div id="gameList" class="row">
-    <ul class="infinite-scroll">
-        <partial name="_GamesPage" model="(ViewBag.Games as Dictionary<int, GameViewModel>)" />
-    </ul>
+<div class="row infinite-scroll">
+    <partial name="_GamesPage" model="Model" />
 </div>
 
 @section scripts{

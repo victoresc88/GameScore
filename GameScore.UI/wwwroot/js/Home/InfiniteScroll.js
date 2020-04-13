@@ -1,12 +1,8 @@
-﻿
-var page = 0,
+﻿var page = 0,
     inCallback = false,
     hasReachedEndOfInfiniteScroll = false;
 
 var ulScrollHandler = function () {
-    console.log("Document height: " + ($(document).height() - $(window).height()));
-    console.log("Scroll top: " + $(window).scrollTop());
-
     if (hasReachedEndOfInfiniteScroll == false &&
         ($(window).scrollTop() + 2 >= $(document).height() - $(window).height())) {
         loadMoreToInfiniteScrollUl(moreRowsUrl);
@@ -24,15 +20,14 @@ function loadMoreToInfiniteScrollUl(loadMoreRowsUrl) {
             data: "pageNum=" + page,
             success: function (data, textstatus) {
                 if (data != '') {
-                    $("ul.infinite-scroll").append(data);
+                    $("div.infinite-scroll").append(data);
                 }
                 else {
                     page = -1;
+                    showNoMoreRecords();
                 }
 
                 inCallback = false;
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
             }
         });
     }
