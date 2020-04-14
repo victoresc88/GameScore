@@ -36,6 +36,7 @@ namespace GameScore.UI
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IHomeBusiness, HomeBusiness>();
+            services.AddScoped<IGameBusiness, GameBusiness>();
 
             services.AddAutoMapper(typeof(Startup));            
             services.AddControllersWithViews()

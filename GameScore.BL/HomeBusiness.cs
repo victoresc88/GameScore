@@ -18,7 +18,10 @@ namespace GameScore.BL
 
         public IEnumerable<Game> GetAllGames()
         {
-            return _context.Games.OrderByDescending(g => g.ReleaseDate);
+            var listOfGames = _context.Games
+                    .OrderByDescending(g => g.ReleaseDate);
+
+            return listOfGames;
         }
     }
 }

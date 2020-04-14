@@ -14,10 +14,10 @@ namespace GameScore.UI.Controllers
         public const int ITEMS_PER_PAGE = 30;
 
         private readonly IHomeBusiness _homeBusiness;
-        private readonly IMapper _mapper;
         private readonly IMemoryCache _cache;
+        private readonly IMapper _mapper;
 
-        public HomeController(IMapper mapper, IHomeBusiness homeBusiness, IMemoryCache cache)
+        public HomeController(IHomeBusiness homeBusiness, IMapper mapper, IMemoryCache cache)
         {
             _homeBusiness = homeBusiness;
             _mapper = mapper;
