@@ -5,7 +5,7 @@ GameScore.Entities/bin
 GameScore.Entities/obj
 GameScore.DAL/bin
 GameScore.DAL/obj
-GameScore.API/bin
-GameScore.API/obj
+GameScore.BL/bin
+GameScore.BL/obj
 GameScore.UI/bin
 GameScore.UI/obj
