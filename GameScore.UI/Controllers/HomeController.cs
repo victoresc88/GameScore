@@ -31,7 +31,7 @@ namespace GameScore.UI.Controllers
             var pageNumber = 0;
             var gamesByIndex = GetItemsForPage(pageNumber);
             
-            return View("Index", gamesByIndex);
+            return View("Index", gamesByIndex.Values.ToList());
         }
 
         [HttpGet]
@@ -40,12 +40,12 @@ namespace GameScore.UI.Controllers
             pageNumber = pageNumber ?? 0;
             var gamesByIndex = GetItemsForPage(pageNumber.Value);
 
-            return PartialView("_GamesPage", gamesByIndex);
+            return PartialView("_GamesPage", gamesByIndex.Values.ToList());
         }
 
         private Dictionary<int, GameViewModel> GetItemsForPage(int pageNumber)
         {
-            var gamesByIndex = (_cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>);
+            var gamesByIndex = _cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>;
 
             var indexFrom = pageNumber * ITEMS_PER_PAGE;
             var indexTo = indexFrom + ITEMS_PER_PAGE;

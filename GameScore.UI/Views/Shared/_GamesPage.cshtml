@@ -1,15 +1,15 @@
 ﻿
-@model Dictionary<int, GameScore.UI.ViewModels.GameViewModel>
+@model List<GameScore.UI.ViewModels.GameViewModel>
 
 @foreach (var game in Model)
 {
     <div class="card text-dark bg-white" style="width: 18rem; margin:5px">
-        <img class="card-img-top" src="@game.Value.ImageUrl" alt="Card image cap">
+        <img class="card-img-top" src="@game.ImageUrl" alt="Card image cap">
         <div class="card-body">
             <a class="card-text text-dark" 
                asp-controller="Game" 
                asp-action="Details"
-               asp-route-id="@game.Value.Id">@game.Value.Name</a>
+               asp-route-id="@game.Id">@game.Name</a>
         </div>
     </div>
 }
