@@ -36,10 +36,7 @@ namespace GameScore.UI.Controllers
 
         public IActionResult Search(string name)
         {
-            var listOfCache = (_cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>).Values.ToList();
-            var listOfGames = listOfCache.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
-
-            SetSearchItemsInCache(listOfGames);
+            SetSearchItemsInCache(name);
 
             var pageNumber = 0;
             var gamesByIndex = GetItemsForPage(pageNumber);
@@ -68,15 +65,15 @@ namespace GameScore.UI.Controllers
                 .ToDictionary(x => x.Key, x => x.Value);
         }
 
-        private void SetSearchItemsInCache(List<GameViewModel> listOfGames)
+        private void SetSearchItemsInCache(string name)
         {
+            var listOfCache = (_cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>).Values.ToList();
+            var listOfGames = listOfCache.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
+
             var gameIndex = 1;
             var searchedGamestByIndex = listOfGames.ToDictionary(x => gameIndex++, x => x);
 
-            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
-
-            _cache.Set("_SearchListEntry", searchedGamestByIndex, cacheEntryOptions);
+            _cache.Set("_SearchListEntry", searchedGamestByIndex, new MemoryCacheEntryOptions());
         }
     }
 }
