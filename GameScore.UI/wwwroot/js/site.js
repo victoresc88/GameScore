@@ -5,12 +5,6 @@
 
 
 function SearchGame() {
-    $.ajax({
-        type: 'GET',
-        url: '/Game/GetGameFromMemoryCache',
-        data: "name=" + $("#searchBar").val(),
-        success: function (data) {
-            $("#esmegmer").html(data);
-        }
-    });
+    var name = $("#searchBar").val();
+    window.location = searchUrl + '?name=' + name;
 }

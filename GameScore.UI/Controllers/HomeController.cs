@@ -11,7 +11,7 @@ namespace GameScore.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public const int ITEMS_PER_PAGE = 30;
+        public const int ITEMS_PER_PAGE = 20;
 
         private readonly IHomeBusiness _homeBusiness;
         private readonly IMemoryCache _cache;

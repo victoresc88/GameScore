@@ -1,0 +1,15 @@
+﻿
+@model List<GameScore.UI.ViewModels.GameViewModel>
+
+<div class="row infinite-scroll">
+    <partial name="_GamesPage" model="Model" />
+</div>
+
+@section scripts{
+    <script src="~/js/Home/infiniteScroll.js"></script>
+    <script type="text/javascript">
+        var moreRowsUrl = '@Url.Action("RenderSearchListPage", "Game")';
+
+        $(window).scroll(ulScrollHandler);
+    </script>
+}

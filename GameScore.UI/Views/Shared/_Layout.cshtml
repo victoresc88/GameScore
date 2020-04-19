@@ -26,10 +26,8 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            <div id="esmegmer">
-                @RenderBody()
-            </div>
+        <main id="main-container" role="main" class="pb-3">
+            @RenderBody()
         </main>
     </div>
 
@@ -38,6 +36,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        var searchUrl = '@Url.Action("Search", "Game")'
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
