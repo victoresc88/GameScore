@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using GameScore.BL;
 using GameScore.BL.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace GameScore.UI
 {
@@ -29,11 +31,14 @@ namespace GameScore.UI
         {
             services.AddScoped<IHomeBusiness, HomeBusiness>();
             services.AddScoped<IGameBusiness, GameBusiness>();
+            services.AddScoped<IAccountBusiness, AccountBusiness>();
 
-            services.AddAutoMapper(typeof(Startup));            
-            services.AddControllersWithViews()
+            services.AddAutoMapper(typeof(Startup));
+            services.AddControllersWithViews(o => o.Filters.Add(new AuthorizeFilter()))
                 .AddRazorRuntimeCompilation();
             services.AddMemoryCache();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
             services.AddRazorPages();
         }
 

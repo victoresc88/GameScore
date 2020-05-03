@@ -6,6 +6,7 @@ using AutoMapper;
 using GameScore.BL.Interfaces;
 using GameScore.Entities;
 using GameScore.UI.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 

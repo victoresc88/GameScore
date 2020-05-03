@@ -6,9 +6,11 @@ using AutoMapper;
 using GameScore.UI.ViewModels;
 using GameScore.BL.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameScore.UI.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public const int ITEMS_PER_PAGE = 20;
