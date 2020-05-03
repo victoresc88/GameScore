@@ -61,12 +61,10 @@ namespace GameScore.UI.Controllers
 
             var listOfGames = _homeBusiness.GetAllGames();
             var gamesByIndex = _mapper.Map<IEnumerable<GameViewModel>>(listOfGames)
-                                    .ToDictionary(x => gameIndex++, x => x);         
+                                    .ToDictionary(x => gameIndex++, x => x);
 
-            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(60));
-
-            _cache.Set("_GamesEntry", gamesByIndex, cacheEntryOptions);
+            _cache.Set("_GamesEntry", gamesByIndex, new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60)));
         }
     }
 }
