@@ -4,14 +4,16 @@ using GameScore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScore.DAL.Migrations
 {
     [DbContext(typeof(GameScoreDbContext))]
-    partial class GameScoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200506163900_AddScoresAndUsers")]
+    partial class AddScoresAndUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

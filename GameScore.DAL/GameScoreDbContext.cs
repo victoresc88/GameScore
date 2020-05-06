@@ -11,6 +11,8 @@ namespace GameScore.DAL
         public DbSet<PlatformGame> PlatformGames { get; set; }
         public DbSet<GenreGame> GenreGames { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Score> Scores { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public GameScoreDbContext(DbContextOptions<GameScoreDbContext> options) : base(options)
         {        
