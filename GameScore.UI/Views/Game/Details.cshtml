@@ -5,3 +5,8 @@
 <img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">
 
 <p>Release Date: @Model.ReleaseDate</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="_Score" model="Model" />
+}

@@ -27,6 +27,7 @@ namespace GameScore.UI.Controllers
             _cache = cache;
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var game = _gameBusiness.GetGame(id);
@@ -35,6 +36,7 @@ namespace GameScore.UI.Controllers
             return View(gameDetails);
         }
 
+        [AllowAnonymous]
         public IActionResult Search(string name)
         {
             SetSearchItemsInCache(name);
@@ -46,6 +48,7 @@ namespace GameScore.UI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public PartialViewResult RenderSearchListPage(int? pageNumber)
         {
             pageNumber = pageNumber ?? 0;
