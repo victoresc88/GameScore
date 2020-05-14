@@ -6,7 +6,4 @@
 
 <p>Release Date: @Model.ReleaseDate</p>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <partial name="_Score" model="Model" />
-}
+@await  Component.InvokeAsync("Score")

@@ -10,47 +10,48 @@ using System.Text;
 
 namespace GameScore.BL
 {
-    public class AccountBusiness : IAccountBusiness
-    {
-        private readonly GameScoreDbContext _context;
+	public class AccountBusiness : IAccountBusiness
+	{
+		private readonly GameScoreDbContext _context;
 
-        public AccountBusiness()
-        {
-            _context = new GameScoreDbContextFactory().CreateDbContext();
-        }
+		public AccountBusiness()
+		{
+			_context = new GameScoreDbContextFactory().CreateDbContext();
+		}
 
-        public User GetUserByUsernameAndPassword(string username, string password)
-        {
-            var user = _context.Users.SingleOrDefault(u => u.Name == username && 
-                u.Password == password.Hash());
+		public User GetUserByUsernameAndPassword(string username, string password)
+		{
+			var user = _context.Users.SingleOrDefault(u => u.Name == username &&
+				 u.Password == password.Hash());
 
-            return user;
-        }
+			return user;
+		}
 
-        public User CreateNewUser(string username, string password)
-        {
-            _context.Users.Add(new User {
-                Name = username,
-                Password = password.Hash()
-            });
-            _context.SaveChanges();
+		public User CreateNewUser(string username, string password)
+		{
+			_context.Users.Add(new User
+			{
+				Name = username,
+				Password = password.Hash()
+			});
+			_context.SaveChanges();
 
-            return _context.Users.SingleOrDefault(u => u.Name == username &&
-                u.Password == password.Hash());
-        }
+			return _context.Users.SingleOrDefault(u => u.Name == username &&
+				 u.Password == password.Hash());
+		}
 
-        public ClaimsPrincipal CreateClaimsPrincipal(User user, string scheme)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Name)
-            };
+		public ClaimsPrincipal CreateClaimsPrincipal(User user, string scheme)
+		{
+			var claims = new List<Claim>
+				{
+					 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+					 new Claim(ClaimTypes.Name, user.Name)
+				};
 
-            var identity = new ClaimsIdentity(claims, scheme);
-            var principal = new ClaimsPrincipal(identity);
+			var identity = new ClaimsIdentity(claims, scheme);
+			var principal = new ClaimsPrincipal(identity);
 
-            return principal;
-        }
-    }
+			return principal;
+		}
+	}
 }
