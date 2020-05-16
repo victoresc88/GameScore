@@ -47,7 +47,12 @@ namespace GameScore.DAL.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ScoreId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ScoreId");
 
                     b.ToTable("Games");
                 });
@@ -118,15 +123,12 @@ namespace GameScore.DAL.Migrations
                     b.ToTable("PlatformGames");
                 });
 
-            modelBuilder.Entity("GameScore.Entities.Score", b =>
+            modelBuilder.Entity("GameScore.Entities.Rate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("GameId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Gameplay")
                         .HasColumnType("int");
@@ -148,9 +150,34 @@ namespace GameScore.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
                     b.HasIndex("UserId");
+
+                    b.ToTable("Rates");
+                });
+
+            modelBuilder.Entity("GameScore.Entities.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Gameplay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Graphics")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Narrative")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sound")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Scores");
                 });
@@ -174,6 +201,13 @@ namespace GameScore.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("GameScore.Entities.Game", b =>
+                {
+                    b.HasOne("GameScore.Entities.Score", "Score")
+                        .WithMany()
+                        .HasForeignKey("ScoreId");
                 });
 
             modelBuilder.Entity("GameScore.Entities.GenreGame", b =>
@@ -206,14 +240,10 @@ namespace GameScore.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GameScore.Entities.Score", b =>
+            modelBuilder.Entity("GameScore.Entities.Rate", b =>
                 {
-                    b.HasOne("GameScore.Entities.Game", "Game")
-                        .WithMany("Scores")
-                        .HasForeignKey("GameId");
-
-                    b.HasOne("GameScore.Entities.User", null)
-                        .WithMany("Scores")
+                    b.HasOne("GameScore.Entities.User", "User")
+                        .WithMany("Rates")
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

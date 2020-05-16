@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameScore.Entities
 {
-	public class Score
+	public class Rate
 	{
 		public int Id { get; set; }
 		public int Graphics { get; set; }
@@ -12,5 +12,6 @@ namespace GameScore.Entities
 		public int Sound { get; set; }
 		public int Narrative { get; set; }
 		public int Total { get; set; }
+		public User User { get; set; }
 	}
 }
