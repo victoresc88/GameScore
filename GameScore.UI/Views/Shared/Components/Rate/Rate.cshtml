@@ -1,64 +1,70 @@
 ﻿
+@{ 
+	Layout = "_ViewComponentLayout";
+}
 
-<div class="col-md-6">
-	<div class="col-xs-12 col-md-8 text-center">
-		<div class="rating">
-			<span class="fas fa-camera"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
+@if (User.Identity.IsAuthenticated)
+{
+	<div class="col-md-6">
+		<div class="col-xs-12 col-md-12 rate-container">
+			<span class="fas fa-camera rate-icon"></span>
+			<select class="star-rating">
+				<option value="10">Awesome</option>
+				<option value="9">Excellent</option>
+				<option value="8">Very Good</option>
+				<option value="7">Good</option>
+				<option value="6">Interesting</option>
+				<option value="5">Meh</option>
+				<option value="4">Not Good</option>
+				<option value="3">Bad</option>
+				<option value="2">Very Bad</option>
+				<option value="1">Horrible</option>
+			</select>
+		</div>
+		<div class="col-xs-12 col-md-12 rate-container">
+			<span class="fas fa-gamepad rate-icon"></span>
+			<select class="star-rating">
+				<option value="10">Awesome</option>
+				<option value="9">Excellent</option>
+				<option value="8">Very Good</option>
+				<option value="7">Good</option>
+				<option value="6">Interesting</option>
+				<option value="5">Meh</option>
+				<option value="4">Not Good</option>
+				<option value="3">Bad</option>
+				<option value="2">Very Bad</option>
+				<option value="1">Horrible</option>
+			</select>
+		</div>
+		<div class="col-xs-12 col-md-12 rate-container">
+			<span class="fas fa-headphones rate-icon"></span>
+			<select class="star-rating">
+				<option value="10">Awesome</option>
+				<option value="9">Excellent</option>
+				<option value="8">Very Good</option>
+				<option value="7">Good</option>
+				<option value="6">Interesting</option>
+				<option value="5">Meh</option>
+				<option value="4">Not Good</option>
+				<option value="3">Bad</option>
+				<option value="2">Very Bad</option>
+				<option value="1">Horrible</option>
+			</select>
+		</div>
+		<div class="col-xs-12 col-md-12 rate-container">
+			<span class="fas fa-book rate-icon"></span>
+			<select class="star-rating">
+				<option value="10">Awesome</option>
+				<option value="9">Excellent</option>
+				<option value="8">Very Good</option>
+				<option value="7">Good</option>
+				<option value="6">Interesting</option>
+				<option value="5">Meh</option>
+				<option value="4">Not Good</option>
+				<option value="3">Bad</option>
+				<option value="2">Very Bad</option>
+				<option value="1">Horrible</option>
+			</select>
 		</div>
 	</div>
-	<div class="col-xs-12 col-md-8 text-center">
-		<div class="rating">
-			<span class="fas fa-gamepad"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-		</div>
-	</div>
-	<div class="col-xs-12 col-md-8 text-center">
-		<div class="rating">
-			<span class="fas fa-headphones"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-		</div>
-	</div>
-	<div class="col-xs-12 col-md-8 text-center">
-		<div class="rating">
-			<span class="fas fa-book"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-			<span class="far fa-star"></span>
-		</div>
-	</div>
-</div>
+}
