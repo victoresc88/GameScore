@@ -16,9 +16,9 @@ namespace GameScore.UI.ViewComponents
 			_scoreBusiness = scoreBusiness;
 		}
 
-		public IViewComponentResult Invoke()
+		public IViewComponentResult Invoke(int id)
 		{
-			return View("Rate");
+			return View("Rate", id);
 		}
 	}
 }

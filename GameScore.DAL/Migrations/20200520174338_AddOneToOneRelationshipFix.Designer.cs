@@ -4,14 +4,16 @@ using GameScore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScore.DAL.Migrations
 {
     [DbContext(typeof(GameScoreDbContext))]
-    partial class GameScoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200520174338_AddOneToOneRelationshipFix")]
+    partial class AddOneToOneRelationshipFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +162,7 @@ namespace GameScore.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GameId")
+                    b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<float>("Gameplay")
@@ -180,7 +182,8 @@ namespace GameScore.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
+                    b.HasIndex("GameId")
+                        .IsUnique();
 
                     b.ToTable("Scores");
                 });
@@ -246,8 +249,10 @@ namespace GameScore.DAL.Migrations
             modelBuilder.Entity("GameScore.Entities.Score", b =>
                 {
                     b.HasOne("GameScore.Entities.Game", "Game")
-                        .WithMany("Score")
-                        .HasForeignKey("GameId");
+                        .WithOne("Score")
+                        .HasForeignKey("GameScore.Entities.Score", "GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

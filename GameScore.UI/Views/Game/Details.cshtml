@@ -9,6 +9,6 @@
 <div class="container">
 	<div class="row">
 		@await Component.InvokeAsync("Score")
-		@await Component.InvokeAsync("Rate")
+		@await Component.InvokeAsync("Rate", new { id = Model.Id })
 	</div>
 </div>

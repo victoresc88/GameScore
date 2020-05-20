@@ -10,6 +10,6 @@ namespace GameScore.Entities
 		public string Name { get; set; }
 		public string Password { get; set; }
 		public string GoogleId { get; set; }
-		public ICollection<Rate> Rates { get; set; }
+		public virtual ICollection<Rate> Rates { get; set; }
 	}
 }

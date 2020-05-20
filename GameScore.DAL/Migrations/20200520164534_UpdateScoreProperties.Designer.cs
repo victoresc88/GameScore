@@ -4,14 +4,16 @@ using GameScore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameScore.DAL.Migrations
 {
     [DbContext(typeof(GameScoreDbContext))]
-    partial class GameScoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200520164534_UpdateScoreProperties")]
+    partial class UpdateScoreProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,12 @@ namespace GameScore.DAL.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ScoreId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ScoreId");
 
                     b.ToTable("Games");
                 });
@@ -160,9 +167,6 @@ namespace GameScore.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GameId")
-                        .HasColumnType("int");
-
                     b.Property<float>("Gameplay")
                         .HasColumnType("real");
 
@@ -179,8 +183,6 @@ namespace GameScore.DAL.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GameId");
 
                     b.ToTable("Scores");
                 });
@@ -204,6 +206,13 @@ namespace GameScore.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("GameScore.Entities.Game", b =>
+                {
+                    b.HasOne("GameScore.Entities.Score", "Score")
+                        .WithMany()
+                        .HasForeignKey("ScoreId");
                 });
 
             modelBuilder.Entity("GameScore.Entities.GenreGame", b =>
@@ -241,13 +250,6 @@ namespace GameScore.DAL.Migrations
                     b.HasOne("GameScore.Entities.User", "User")
                         .WithMany("Rates")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("GameScore.Entities.Score", b =>
-                {
-                    b.HasOne("GameScore.Entities.Game", "Game")
-                        .WithMany("Score")
-                        .HasForeignKey("GameId");
                 });
 #pragma warning restore 612, 618
         }

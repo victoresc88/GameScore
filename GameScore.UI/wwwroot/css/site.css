@@ -71,11 +71,16 @@ body {
 }
 
 .rate-container {
-   display: flex;
    margin-top: 5px;
+   display: flex;
 }
 
 .rate-icon {
-   margin-top: 5px;
-   margin-right: 3px;
+   margin-right: 5px;
+   margin-top: 10px;
+}
+
+.submit-rate {
+   margin-top: 10px;
+   margin-left: 17px;
 }

@@ -7,10 +7,11 @@ namespace GameScore.Entities
 	public class Score
 	{
 		public int Id { get; set; }
-		public int Graphics { get; set; }
-		public int Gameplay { get; set; }
-		public int Sound { get; set; }
-		public int Narrative { get; set; }
-		public int Total { get; set; }
+		public float Graphics { get; set; }
+		public float Gameplay { get; set; }
+		public float Sound { get; set; }
+		public float Narrative { get; set; }
+		public float Total { get; set; }
+		public virtual Game Game { get; set; }
 	}
 }
