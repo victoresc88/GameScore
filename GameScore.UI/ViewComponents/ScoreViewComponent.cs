@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GameScore.BL.Interfaces;
+﻿using GameScore.BL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameScore.UI.ViewComponents
