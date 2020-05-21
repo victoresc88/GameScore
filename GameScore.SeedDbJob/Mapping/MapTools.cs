@@ -42,8 +42,7 @@ namespace GameScore.SeedDbJob.Mapping
 
 		private IMapper SetMapperConfiguration()
 		{
-			var config = new MapperConfiguration(cfg =>
-			{
+			var config = new MapperConfiguration(cfg => {
 				cfg.AddProfile<GameProfile>();
 				cfg.AddProfile<PlatformProfile>();
 				cfg.AddProfile<GenreProfile>();
