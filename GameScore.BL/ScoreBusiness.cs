@@ -1,8 +1,6 @@
 ﻿using GameScore.BL.Interfaces;
 using GameScore.DAL;
 using GameScore.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
