@@ -13,6 +13,7 @@ namespace GameScore.Entities
 		public int Sound { get; set; }
 		public int Narrative { get; set; }
 		public float Total { get; set; }
-		public virtual User User { get; set; }
+		public int UserId { get; set; }
+		public User User { get; set; }
 	}
 }

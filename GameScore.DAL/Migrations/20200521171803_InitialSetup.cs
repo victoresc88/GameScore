@@ -3,10 +3,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GameScore.DAL.Migrations
 {
-    public partial class ChangeRatingAndScore : Migration
+    public partial class InitialSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Games",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OriginalId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    ReleaseDate = table.Column<DateTime>(nullable: false),
+                    PlayTime = table.Column<int>(nullable: false),
+                    Metacritic = table.Column<int>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Games", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
@@ -36,23 +55,6 @@ namespace GameScore.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Scores",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Graphics = table.Column<int>(nullable: false),
-                    Gameplay = table.Column<int>(nullable: false),
-                    Sound = table.Column<int>(nullable: false),
-                    Narrative = table.Column<int>(nullable: false),
-                    Total = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -68,53 +70,27 @@ namespace GameScore.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Games",
+                name: "Scores",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OriginalId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    ReleaseDate = table.Column<DateTime>(nullable: false),
-                    PlayTime = table.Column<int>(nullable: false),
-                    Metacritic = table.Column<int>(nullable: false),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    ScoreId = table.Column<int>(nullable: true)
+                    GameId = table.Column<int>(nullable: false),
+                    Graphics = table.Column<float>(nullable: false),
+                    Gameplay = table.Column<float>(nullable: false),
+                    Sound = table.Column<float>(nullable: false),
+                    Narrative = table.Column<float>(nullable: false),
+                    Total = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Games", x => x.Id);
+                    table.PrimaryKey("PK_Scores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Games_Scores_ScoreId",
-                        column: x => x.ScoreId,
-                        principalTable: "Scores",
+                        name: "FK_Scores_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Graphics = table.Column<int>(nullable: false),
-                    Gameplay = table.Column<int>(nullable: false),
-                    Sound = table.Column<int>(nullable: false),
-                    Narrative = table.Column<int>(nullable: false),
-                    Total = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rates", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Rates_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,10 +141,30 @@ namespace GameScore.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Games_ScoreId",
-                table: "Games",
-                column: "ScoreId");
+            migrationBuilder.CreateTable(
+                name: "Rates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GameId = table.Column<int>(nullable: false),
+                    Graphics = table.Column<int>(nullable: false),
+                    Gameplay = table.Column<int>(nullable: false),
+                    Sound = table.Column<int>(nullable: false),
+                    Narrative = table.Column<int>(nullable: false),
+                    Total = table.Column<float>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rates_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_GenreGames_GenreId",
@@ -184,6 +180,12 @@ namespace GameScore.DAL.Migrations
                 name: "IX_Rates_UserId",
                 table: "Rates",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_GameId",
+                table: "Scores",
+                column: "GameId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -198,10 +200,10 @@ namespace GameScore.DAL.Migrations
                 name: "Rates");
 
             migrationBuilder.DropTable(
-                name: "Genres");
+                name: "Scores");
 
             migrationBuilder.DropTable(
-                name: "Games");
+                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "Platforms");
@@ -210,7 +212,7 @@ namespace GameScore.DAL.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Scores");
+                name: "Games");
         }
     }
 }

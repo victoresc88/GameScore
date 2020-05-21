@@ -15,6 +15,8 @@ namespace GameScore.Entities
 		public int PlayTime { get; set; }
 		public int Metacritic { get; set; }
 		public string ImageUrl { get; set; }
-		public virtual ICollection<Score> Score { get; set; }
+		public Score Score { get; set; }
+		public List<PlatformGame> PlatformGames { get; set; }
+		public List<GenreGame> GenreGames { get; set; }
 	}
 }

@@ -143,7 +143,7 @@ namespace GameScore.DAL.Migrations
                     b.Property<float>("Total")
                         .HasColumnType("real");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -160,7 +160,7 @@ namespace GameScore.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GameId")
+                    b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<float>("Gameplay")
@@ -180,7 +180,8 @@ namespace GameScore.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
+                    b.HasIndex("GameId")
+                        .IsUnique();
 
                     b.ToTable("Scores");
                 });
@@ -209,13 +210,13 @@ namespace GameScore.DAL.Migrations
             modelBuilder.Entity("GameScore.Entities.GenreGame", b =>
                 {
                     b.HasOne("GameScore.Entities.Game", "Game")
-                        .WithMany()
+                        .WithMany("GenreGames")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GameScore.Entities.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("GenreGames")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -224,13 +225,13 @@ namespace GameScore.DAL.Migrations
             modelBuilder.Entity("GameScore.Entities.PlatformGame", b =>
                 {
                     b.HasOne("GameScore.Entities.Game", "Game")
-                        .WithMany()
+                        .WithMany("PlatformGames")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GameScore.Entities.Platform", "Platform")
-                        .WithMany()
+                        .WithMany("PlatformGames")
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -240,14 +241,18 @@ namespace GameScore.DAL.Migrations
                 {
                     b.HasOne("GameScore.Entities.User", "User")
                         .WithMany("Rates")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GameScore.Entities.Score", b =>
                 {
-                    b.HasOne("GameScore.Entities.Game", "Game")
-                        .WithMany("Score")
-                        .HasForeignKey("GameId");
+                    b.HasOne("GameScore.Entities.Game", null)
+                        .WithOne("Score")
+                        .HasForeignKey("GameScore.Entities.Score", "GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

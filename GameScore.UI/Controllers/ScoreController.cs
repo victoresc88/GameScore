@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using GameScore.BL.Interfaces;
 using GameScore.Entities;
 using GameScore.UI.ViewModels;
@@ -30,7 +25,7 @@ namespace GameScore.UI.Controllers
 			var rate = _scoreBusiness.SetUserRates(
 				_mapper.Map<Rate>(rateViewModel), 
 				HttpContext.User.Identity.Name);
-			_scoreBusiness.UpdateGameScore(rate);
+			_scoreBusiness.UpdateGameScore(rate.GameId);
 
 			return ViewComponent("Rate");
 		}
