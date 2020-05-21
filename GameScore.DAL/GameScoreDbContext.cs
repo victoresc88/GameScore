@@ -1,5 +1,4 @@
-﻿
-using GameScore.Entities;
+﻿using GameScore.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameScore.DAL
