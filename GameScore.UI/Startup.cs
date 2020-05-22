@@ -34,6 +34,8 @@ namespace GameScore.UI
 			services.AddScoped<IAccountBusiness, AccountBusiness>();
 			services.AddScoped<IScoreBusiness, ScoreBusiness>();
 
+			ServiceExtensions.ConfigureRepositoryWrapper(services);
+
 			services.AddAutoMapper(typeof(Startup));
 			services.AddControllersWithViews(o => o.Filters.Add(new AuthorizeFilter()))
 				 .AddRazorRuntimeCompilation();

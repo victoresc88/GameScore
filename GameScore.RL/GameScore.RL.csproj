@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameScore.DAL\GameScore.DAL.csproj" />
-    <ProjectReference Include="..\GameScore.Entities\GameScore.Entities.csproj" />
-    <ProjectReference Include="..\GameScore.RL\GameScore.RL.csproj" />
   </ItemGroup>
 
 </Project>
