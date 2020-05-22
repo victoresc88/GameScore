@@ -1,9 +1,6 @@
 ﻿using GameScore.RL.Interfaces;
 using GameScore.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using GameScore.DAL;
 
 namespace GameScore.RL
@@ -20,6 +17,5 @@ namespace GameScore.RL
 				.Where(u => u.Name == username)
 				.FirstOrDefault();
 		}
-
 	}
 }

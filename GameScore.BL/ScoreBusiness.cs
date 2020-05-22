@@ -40,6 +40,8 @@ namespace GameScore.BL
 				_wrapperRepository.Rate.Update(currentRateOfUser);
 			}
 
+			_wrapperRepository.Save();
+
 			return rate;
 		}
 

@@ -1,8 +1,5 @@
 ﻿using GameScore.DAL;
 using GameScore.RL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameScore.RL
 {
