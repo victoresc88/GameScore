@@ -1,41 +1,41 @@
 ﻿using GameScore.BL.Interfaces;
-using GameScore.DAL;
 using GameScore.Entities;
+using GameScore.RL.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 
 namespace GameScore.BL
 {
 	public class AccountBusiness : IAccountBusiness
 	{
-		private readonly GameScoreDbContext _context;
+		private readonly IWrapperRepository _wrapperRepository;
 
-		public AccountBusiness()
+		public AccountBusiness(IWrapperRepository wrapperRepository)
 		{
-			_context = new GameScoreDbContextFactory().CreateDbContext();
+			_wrapperRepository = wrapperRepository;
 		}
 
 		public User GetUserByUsernameAndPassword(string username, string password)
 		{
-			var user = _context.Users
-				.SingleOrDefault(u => u.Name == username 
-					&& u.Password == password.Hash());
+			var hashedPassword = password.Hash();
+			var user = _wrapperRepository.Account.GetUserByUsernameAndPassword(username, hashedPassword);
 
 			return user;
 		}
 
 		public User CreateNewUser(string username, string password)
 		{
-			_context.Users.Add(new User {
-				Name = username,
-				Password = password.Hash()
-			});
-			_context.SaveChanges();
+			var hashedPassword = password.Hash();
 
-			return _context.Users
-				.SingleOrDefault(u => u.Name == username 
-					&& u.Password == password.Hash());
+			_wrapperRepository.Account.Create(
+				new User { 
+					Name = username, 
+					Password = hashedPassword 
+				}
+			);
+			_wrapperRepository.Save();
+
+			return _wrapperRepository.Account.GetUserByUsernameAndPassword(username, hashedPassword);
 		}
 
 		public ClaimsPrincipal CreateClaimsPrincipal(User user, string scheme)

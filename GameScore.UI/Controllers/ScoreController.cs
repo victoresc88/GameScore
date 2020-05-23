@@ -25,7 +25,7 @@ namespace GameScore.UI.Controllers
 			var rate = _scoreBusiness.SetUserRates(
 				_mapper.Map<Rate>(rateViewModel), 
 				HttpContext.User.Identity.Name);
-			//_scoreBusiness.UpdateGameScore(rate.GameId);
+			_scoreBusiness.UpdateGameScore(rate.GameId);
 
 			return ViewComponent("Rate");
 		}

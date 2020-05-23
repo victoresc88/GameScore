@@ -1,26 +1,21 @@
 ﻿using GameScore.BL.Interfaces;
-using GameScore.DAL;
 using GameScore.Entities;
-using System.Linq;
+using GameScore.RL.Interfaces;
 
 namespace GameScore.BL
 {
 	public class GameBusiness : IGameBusiness
 	{
-		private readonly GameScoreDbContext _context;
+		private readonly IWrapperRepository _wrapperRepository;
 
-		public GameBusiness()
+		public GameBusiness(IWrapperRepository wrapperRepository)
 		{
-			_context = new GameScoreDbContextFactory().CreateDbContext();
+			_wrapperRepository = wrapperRepository;
 		}
 
-		public Game GetGame(int id)
+		public Game GetGameById(int id)
 		{
-			var game = _context.Games
-				.Where(x => x.Id == id)
-				.FirstOrDefault();
-
-			return game;
+			return _wrapperRepository.Game.GetGameById(id);
 		}
 	}
 }

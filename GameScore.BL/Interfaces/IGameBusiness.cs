@@ -4,6 +4,6 @@ namespace GameScore.BL.Interfaces
 {
 	public interface IGameBusiness
 	{
-		public Game GetGame(int id);
+		public Game GetGameById(int id);
 	}
 }

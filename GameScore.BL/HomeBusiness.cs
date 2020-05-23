@@ -1,24 +1,22 @@
 ﻿using GameScore.BL.Interfaces;
-using GameScore.DAL;
 using GameScore.Entities;
+using GameScore.RL.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GameScore.BL
 {
 	public class HomeBusiness : IHomeBusiness
 	{
-		private readonly GameScoreDbContext _context;
+		private readonly IWrapperRepository _wrapperRepository;
 
-		public HomeBusiness()
+		public HomeBusiness(IWrapperRepository wrapperRepository)
 		{
-			_context = new GameScoreDbContextFactory().CreateDbContext();
+			_wrapperRepository = wrapperRepository;
 		}
 
 		public IEnumerable<Game> GetAllGames()
 		{
-			return _context.Games
-				.OrderByDescending(g => g.ReleaseDate);
+			return _wrapperRepository.Game.GetListOfGames();
 		}
 	}
 }

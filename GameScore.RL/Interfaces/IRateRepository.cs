@@ -1,9 +1,11 @@
 ﻿using GameScore.Entities;
+using System.Collections.Generic;
 
 namespace GameScore.RL.Interfaces
 {
 	public interface IRateRepository : IBaseRepository<Rate>
 	{
-		public Rate GetCurrentRateOfUserByGame(int gameId, string username);
+		public Rate GetRateOfUserByGameId(int id, string username);
+		public IEnumerable<Rate> GetListOfRatesByGameId(int id);
 	}
 }

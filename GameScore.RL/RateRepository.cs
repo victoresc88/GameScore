@@ -2,6 +2,7 @@
 using GameScore.Entities;
 using GameScore.RL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GameScore.RL
@@ -12,13 +13,19 @@ namespace GameScore.RL
 		{
 		}
 
-		public Rate GetCurrentRateOfUserByGame(int gameId, string username)
+		public Rate GetRateOfUserByGameId(int id, string username)
 		{
 			return _context.Rates
 				.Include(r => r.User)
-				.Where(r => r.GameId == gameId
+				.Where(r => r.GameId == id
 					&& r.User.Name == username)
 				.FirstOrDefault();
+		}
+
+		public IEnumerable<Rate> GetListOfRatesByGameId(int id)
+		{
+			return _context.Rates
+				.Where(r => r.GameId == id);
 		}
 	}
 }

@@ -3,10 +3,10 @@ namespace GameScore.RL.Interfaces
 {
 	public interface IWrapperRepository
 	{
-		IAccountRepository Account { get; }
-		IGameRepository Game { get; }
-		IRateRepository Rate { get; }
-		IScoreRepository Score { get; }
-		void Save();
+		public IAccountRepository Account { get; }
+		public IGameRepository Game { get; }
+		public IRateRepository Rate { get; }
+		public IScoreRepository Score { get; }
+		public void Save();
 	}
 }

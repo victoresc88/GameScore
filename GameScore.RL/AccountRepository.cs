@@ -17,5 +17,12 @@ namespace GameScore.RL
 				.Where(u => u.Name == username)
 				.FirstOrDefault();
 		}
+
+		public User GetUserByUsernameAndPassword(string username, string password)
+		{
+			return _context.Users
+				.SingleOrDefault(u => u.Name == username 
+					&& u.Password == password);
+		}
 	}
 }

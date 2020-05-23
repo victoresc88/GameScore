@@ -27,7 +27,7 @@ namespace GameScore.UI.Controllers
 		[AllowAnonymous]
 		public IActionResult Details(int id)
 		{
-			var game = _gameBusiness.GetGame(id);
+			var game = _gameBusiness.GetGameById(id);
 			var gameDetails = _mapper.Map<GameDetailsViewModel>(game);
 
 			return View(gameDetails);
