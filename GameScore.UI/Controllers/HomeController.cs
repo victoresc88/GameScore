@@ -28,44 +28,36 @@ namespace GameScore.UI.Controllers
 
 		public IActionResult Index()
 		{
-			SetAllItemsInCache();
+			SetListOfGamesInCache();
 
-			var pageNumber = 0;
-			var gamesByIndex = GetItemsForPage(pageNumber);
+			var numberOfPage = 0;
+			var gamesByIndex = _wrapperBusiness.Game.GetListOfGamesForPage(_cache, numberOfPage);
 
-			return View("Index", gamesByIndex.Values.ToList());
+			return View("Index", _mapper.Map<IEnumerable<GameViewModel>>(gamesByIndex.Values.ToList()));
 		}
 
 		[HttpGet]
 		public IActionResult RenderGamesPage(int? pageNumber)
 		{
-			pageNumber = pageNumber ?? 0;
-			var gamesByIndex = GetItemsForPage(pageNumber.Value);
+			var numberOfPage = pageNumber ?? 0;
+			var gamesByIndex = _wrapperBusiness.Game.GetListOfGamesForPage(_cache, numberOfPage);
 
-			return PartialView("_GamesPage", gamesByIndex.Values.ToList());
+			return PartialView("_GamesPage", _mapper.Map<IEnumerable<GameViewModel>>(gamesByIndex.Values.ToList()));
 		}
 
-		private Dictionary<int, GameViewModel> GetItemsForPage(int pageNumber)
+		private void SetListOfGamesInCache()
 		{
-			var gamesByIndex = _cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>;
-
-			var indexFrom = pageNumber * ITEMS_PER_PAGE;
-			var indexTo = indexFrom + ITEMS_PER_PAGE;
-
-			return gamesByIndex
-				 .Where(x => x.Key > indexFrom && x.Key <= indexTo)
-				 .ToDictionary(x => x.Key, x => x.Value);
-		}
-
-		private void SetAllItemsInCache()
-		{
-			var gameIndex = 1;
+			var index = 1;
 			var listOfGames = _wrapperBusiness.Game.GetListOfGames();
-			var gamesByIndex = _mapper.Map<IEnumerable<GameViewModel>>(listOfGames)
-											.ToDictionary(x => gameIndex++, x => x);
+			var gamesByIndex = listOfGames
+				.ToDictionary(g => index++, g => g);
 
-			_cache.Set("_GamesEntry", gamesByIndex, new MemoryCacheEntryOptions()
-				 .SetSlidingExpiration(TimeSpan.FromMinutes(60)));
+			_cache.Set(
+				"_GamesEntry", 
+				gamesByIndex, 
+				new MemoryCacheEntryOptions()
+					.SetSlidingExpiration(TimeSpan.FromMinutes(60))
+			);
 		}
 	}
 }
