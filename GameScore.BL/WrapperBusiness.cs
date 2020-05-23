@@ -10,6 +10,7 @@ namespace GameScore.BL
 		private IAccountBusiness _account;
 		private IGameBusiness _game;
 		private IScoreBusiness _score;
+		private IRateBusiness _rate;
 
 		public WrapperBusiness(IWrapperRepository wrapperRepository)
 		{
@@ -40,6 +41,15 @@ namespace GameScore.BL
 			{
 				if (_score == null) { _score = new ScoreBusiness(_wrapperRepository); }
 				return _score;
+			}
+		}
+
+		public IRateBusiness Rate
+		{
+			get
+			{
+				if (_rate == null) { _rate = new RateBusiness(_wrapperRepository); }
+				return _rate;
 			}
 		}
 	}

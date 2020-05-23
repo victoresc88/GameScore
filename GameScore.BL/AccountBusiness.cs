@@ -15,6 +15,11 @@ namespace GameScore.BL
 			_wrapperRepository = wrapperRepository;
 		}
 
+		public User GetUserByUsername(string username)
+		{
+			return _wrapperRepository.Account.GetUserByUsername(username);
+		}
+
 		public User GetUserByUsernameAndPassword(string username, string password)
 		{
 			var hashedPassword = password.Hash();

@@ -4,11 +4,12 @@ using GameScore.UI.ViewModels;
 
 namespace GameScore.UI.Mapper.Profiles
 {
-	public class ScoreProfile : Profile
+	public class RateProfile : Profile
 	{
-		public ScoreProfile()
+		public RateProfile()
 		{
 			CreateMap<RateViewModel, Rate>();
+			CreateMap<Rate, RateViewModel>();
 		}
 	}
 }

@@ -9,7 +9,7 @@ $("#submitRating").click(function () {
    });
 
    $.ajax({
-      url: '/Score/Rate',
+      url: '/Rate/Submit',
       data: dataObject,
       contentType: 'application/json',
       type: 'POST',

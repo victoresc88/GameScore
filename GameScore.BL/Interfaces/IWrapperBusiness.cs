@@ -9,5 +9,6 @@ namespace GameScore.BL.Interfaces
 		public IAccountBusiness Account { get; }
 		public IGameBusiness Game { get; }
 		public IScoreBusiness Score { get; }
+		public IRateBusiness Rate { get; }
 	}
 }
