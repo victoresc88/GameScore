@@ -5,11 +5,11 @@ namespace GameScore.UI.ViewComponents
 {
 	public class RateViewComponent : ViewComponent
 	{
-		private readonly IScoreBusiness _scoreBusiness;
+		private readonly IWrapperBusiness _wrapperBusiness;
 
-		public RateViewComponent(IScoreBusiness scoreBusiness)
+		public RateViewComponent(IWrapperBusiness wrapperBusiness)
 		{
-			_scoreBusiness = scoreBusiness;
+			_wrapperBusiness = wrapperBusiness;
 		}
 
 		public IViewComponentResult Invoke(int id)

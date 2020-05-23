@@ -10,11 +10,11 @@ namespace GameScore.UI.Controllers
 {
 	public class AccountController : Controller
 	{
-		private readonly IAccountBusiness _accountBusiness;
+		private readonly IWrapperBusiness _wrapperBusiness;
 
-		public AccountController(IAccountBusiness accountBusiness)
+		public AccountController(IWrapperBusiness wrapperBusiness)
 		{
-			_accountBusiness = accountBusiness;
+			_wrapperBusiness = wrapperBusiness;
 		}
 
 		[AllowAnonymous]
@@ -33,11 +33,11 @@ namespace GameScore.UI.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> Login(LoginViewModel viewModel)
 		{
-			var user = _accountBusiness.GetUserByUsernameAndPassword(viewModel.Username, viewModel.Password);
+			var user = _wrapperBusiness.Account.GetUserByUsernameAndPassword(viewModel.Username, viewModel.Password);
 			if (user == null)
 				return Unauthorized();
 
-			var principal = _accountBusiness.CreateClaimsPrincipal(user, CookieAuthenticationDefaults.AuthenticationScheme);
+			var principal = _wrapperBusiness.Account.CreateClaimsPrincipal(user, CookieAuthenticationDefaults.AuthenticationScheme);
 
 			await HttpContext.SignInAsync(
 				 CookieAuthenticationDefaults.AuthenticationScheme,
@@ -52,11 +52,11 @@ namespace GameScore.UI.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> Register(RegisterViewModel viewModel)
 		{
-			var user = _accountBusiness.CreateNewUser(viewModel.Username, viewModel.Password);
+			var user = _wrapperBusiness.Account.CreateNewUser(viewModel.Username, viewModel.Password);
 			if (user == null)
 				return Unauthorized();
 
-			var principal = _accountBusiness.CreateClaimsPrincipal(user, CookieAuthenticationDefaults.AuthenticationScheme);
+			var principal = _wrapperBusiness.Account.CreateClaimsPrincipal(user, CookieAuthenticationDefaults.AuthenticationScheme);
 
 			await HttpContext.SignInAsync(
 				 CookieAuthenticationDefaults.AuthenticationScheme,

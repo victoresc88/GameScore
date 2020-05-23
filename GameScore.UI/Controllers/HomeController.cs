@@ -15,13 +15,13 @@ namespace GameScore.UI.Controllers
 	{
 		public const int ITEMS_PER_PAGE = 20;
 
-		private readonly IHomeBusiness _homeBusiness;
+		private readonly IWrapperBusiness _wrapperBusiness;
 		private readonly IMemoryCache _cache;
 		private readonly IMapper _mapper;
 
-		public HomeController(IHomeBusiness homeBusiness, IMapper mapper, IMemoryCache cache)
+		public HomeController(IWrapperBusiness wrapperBusiness, IMapper mapper, IMemoryCache cache)
 		{
-			_homeBusiness = homeBusiness;
+			_wrapperBusiness = wrapperBusiness;
 			_mapper = mapper;
 			_cache = cache;
 		}
@@ -60,8 +60,7 @@ namespace GameScore.UI.Controllers
 		private void SetAllItemsInCache()
 		{
 			var gameIndex = 1;
-
-			var listOfGames = _homeBusiness.GetAllGames();
+			var listOfGames = _wrapperBusiness.Game.GetListOfGames();
 			var gamesByIndex = _mapper.Map<IEnumerable<GameViewModel>>(listOfGames)
 											.ToDictionary(x => gameIndex++, x => x);
 

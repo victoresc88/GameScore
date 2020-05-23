@@ -9,12 +9,12 @@ namespace GameScore.UI.Controllers
 {
 	public class ScoreController : Controller
 	{
-		private readonly IScoreBusiness _scoreBusiness;
+		private readonly IWrapperBusiness _wrapperBusiness;
 		private readonly IMapper _mapper;
 
-		public ScoreController(IScoreBusiness scoreBusiness, IMapper mapper)
+		public ScoreController(IWrapperBusiness wrapperBusiness, IMapper mapper)
 		{
-			_scoreBusiness = scoreBusiness;
+			_wrapperBusiness = wrapperBusiness;
 			_mapper = mapper;
 		}
 
@@ -22,10 +22,10 @@ namespace GameScore.UI.Controllers
 		[AllowAnonymous]
 		public ViewComponentResult Rate([FromBody] RateViewModel rateViewModel)
 		{
-			var rate = _scoreBusiness.SetUserRates(
+			var rate = _wrapperBusiness.Score.SetUserRates(
 				_mapper.Map<Rate>(rateViewModel), 
 				HttpContext.User.Identity.Name);
-			_scoreBusiness.UpdateGameScore(rate.GameId);
+			_wrapperBusiness.Score.UpdateGameScore(rate.GameId);
 
 			return ViewComponent("Rate");
 		}

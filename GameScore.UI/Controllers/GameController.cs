@@ -13,13 +13,13 @@ namespace GameScore.UI.Controllers
 	{
 		public const int ITEMS_PER_PAGE = 20;
 
-		private readonly IGameBusiness _gameBusiness;
+		private readonly IWrapperBusiness _wrapperBusiness;
 		private readonly IMemoryCache _cache;
 		private readonly IMapper _mapper;
 
-		public GameController(IGameBusiness gameBusiness, IMapper mapper, IMemoryCache cache)
+		public GameController(IWrapperBusiness wrapperBusiness, IMapper mapper, IMemoryCache cache)
 		{
-			_gameBusiness = gameBusiness;
+			_wrapperBusiness = wrapperBusiness;
 			_mapper = mapper;
 			_cache = cache;
 		}
@@ -27,7 +27,7 @@ namespace GameScore.UI.Controllers
 		[AllowAnonymous]
 		public IActionResult Details(int id)
 		{
-			var game = _gameBusiness.GetGameById(id);
+			var game = _wrapperBusiness.Game.GetGameById(id);
 			var gameDetails = _mapper.Map<GameDetailsViewModel>(game);
 
 			return View(gameDetails);

@@ -17,7 +17,8 @@ namespace GameScore.RL
 			_context = new GameScoreDbContextFactory().CreateDbContext();
 		}
 
-		public IAccountRepository Account {
+		public IAccountRepository Account 
+		{
 			get
 			{
 				if (_account == null) { _account = new AccountRepository(_context); }

@@ -1,6 +1,7 @@
 ﻿using GameScore.BL.Interfaces;
 using GameScore.Entities;
 using GameScore.RL.Interfaces;
+using System.Collections.Generic;
 
 namespace GameScore.BL
 {
@@ -16,6 +17,11 @@ namespace GameScore.BL
 		public Game GetGameById(int id)
 		{
 			return _wrapperRepository.Game.GetGameById(id);
+		}
+
+		public IEnumerable<Game> GetListOfGames()
+		{
+			return _wrapperRepository.Game.GetListOfGames();
 		}
 	}
 }

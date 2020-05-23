@@ -29,12 +29,8 @@ namespace GameScore.UI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddScoped<IHomeBusiness, HomeBusiness>();
-			services.AddScoped<IGameBusiness, GameBusiness>();
-			services.AddScoped<IAccountBusiness, AccountBusiness>();
-			services.AddScoped<IScoreBusiness, ScoreBusiness>();
-
 			ServiceExtensions.ConfigureRepositoryWrapper(services);
+			ServiceExtensions.ConfigureBusinessWrapper(services);
 
 			services.AddAutoMapper(typeof(Startup));
 			services.AddControllersWithViews(o => o.Filters.Add(new AuthorizeFilter()))
