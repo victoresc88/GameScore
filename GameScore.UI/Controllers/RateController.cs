@@ -4,6 +4,7 @@ using GameScore.Entities;
 using GameScore.UI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace GameScore.UI.Controllers
 {
@@ -27,14 +28,12 @@ namespace GameScore.UI.Controllers
 
 			var user = _wrapperBusiness.Account.GetUserByUsername(username);
 			var currentRate = _wrapperBusiness.Rate.GetRateOfUserByGameId(sourceRate.GameId, username);
-
 			currentRate = (currentRate == null) ? 
 				_wrapperBusiness.Rate.Create(sourceRate, user) : 
 				_wrapperBusiness.Rate.Update(currentRate, sourceRate);	
+			_wrapperBusiness.Score.UpdateScoreByGameId(currentRate.GameId);
 
-			_wrapperBusiness.Score.UpdateGameScore(currentRate.GameId);
-
-			return ViewComponent("Rate");
+			return ViewComponent("Score", Convert.ToInt32(rateViewModel.GameId));
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿
+﻿@model GameScore.UI.ViewModels.ScoreViewModel;
+
 @{
 	Layout = "_ViewComponentLayout";
 }
@@ -6,24 +7,27 @@
 <div class="col-md-6">
 	<div class="row">
 		<div class="col-xs-12 col-md-6 text-center">
-			<h1 class="rating-num">
-				5.0
-			</h1>
-			<div class="rating">
-				<span class="fas fa-star"></span>
-				<span class="fas fa-star"></span>
-				<span class="fas fa-star"></span>
-				<span class="fas fa-star"></span>
-				<span class="fas fa-star"></span>
-				<span class="far fa-star"></span>
-				<span class="far fa-star"></span>
-				<span class="far fa-star"></span>
-				<span class="far fa-star"></span>
-				<span class="far fa-star"></span>
+			<h1>@Model.Total</h1>
+			<div class="stars">
+				@for (int i = 0; i < 10; i++)
+				{
+					if (i < Model.Total && (i + 1) > Model.Total)
+					{
+						<span class="fas fa-star-half-alt"></span>
+					}
+					else if (i < Model.Total)
+					{
+						<span class="fas fa-star"></span>
+					}
+					else
+					{
+						<span class="far fa-star"></span>
+					}
+				}
 			</div>
-			<div>
-				<span id="users-icon" class="fas fa-users"></span>
-				<span>1,050,008</span>
+			<div class="user-rates">
+				<span class="fas fa-users"></span>
+				<span>@Model.NumberOfRates</span>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
@@ -33,9 +37,9 @@
 				</div>
 				<div class="col-xs-8 col-md-9 progress-container">
 					<div class="progress progress-striped">
-						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-							  aria-valuemin="0" aria-valuemax="100" style="width: @(8 * 10)%">
-							8.0
+						<div class="progress-bar @Model.GraphicsProgress" role="progressbar" aria-valuenow="20"
+							  aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Graphics * 10)%">
+							@Model.Graphics
 						</div>
 					</div>
 				</div>
@@ -45,10 +49,10 @@
 					<span title="Gameplay" class="fas fa-gamepad"></span>
 				</div>
 				<div class="col-xs-8 col-md-9 progress-container">
-					<div class="progress">
-						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-							  aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-							6.0
+					<div class="progress progress-striped">
+						<div class="progress-bar @Model.GameplayProgress" role="progressbar" aria-valuenow="20"
+							  aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Gameplay * 10)%">
+							@Model.Gameplay
 						</div>
 					</div>
 				</div>
@@ -58,10 +62,10 @@
 					<span title="Sound" class="fas fa-headphones"></span>
 				</div>
 				<div class="col-xs-8 col-md-9 progress-container">
-					<div class="progress">
-						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
-							  aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-							4.0
+					<div class="progress progress-striped">
+						<div class="progress-bar @Model.SoundProgress" role="progressbar" aria-valuenow="20"
+							  aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Sound * 10)%">
+							@Model.Sound
 						</div>
 					</div>
 				</div>
@@ -71,10 +75,10 @@
 					<span title="Narrative" class="fas fa-book"></span>
 				</div>
 				<div class="col-xs-8 col-md-9 progress-container">
-					<div class="progress">
-						<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
-							  aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-							2.0
+					<div class="progress progress-striped">
+						<div class="progress-bar @Model.NarrativeProgress" role="progressbar" aria-valuenow="20"
+							  aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Narrative * 10)%">
+							@Model.Narrative
 						</div>
 					</div>
 				</div>

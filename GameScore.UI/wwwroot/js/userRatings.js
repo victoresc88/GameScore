@@ -13,8 +13,9 @@ $("#submitRating").click(function () {
       data: dataObject,
       contentType: 'application/json',
       type: 'POST',
-      success: function () {
-         console.log("Jola.....");
+      success: function (data) {
+         console.log(data);
+         $("#score-component-container").html(data);
       }
    });
 });

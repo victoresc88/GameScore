@@ -4,6 +4,7 @@ namespace GameScore.BL.Interfaces
 {
 	public interface IScoreBusiness
 	{
-		public void UpdateGameScore(int gameId);
+		public void UpdateScoreByGameId(int id);
+		public Score GetScoreByGameId(int id);
 	}
 }

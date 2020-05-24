@@ -16,3 +16,11 @@
 .progress-container {
 	height: 30px;
 }
+
+.stars {
+	color: orange;
+}
+
+.user-rates{
+	margin-top: 5px;
+}

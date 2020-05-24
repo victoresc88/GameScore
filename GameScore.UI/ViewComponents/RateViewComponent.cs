@@ -33,7 +33,7 @@ namespace GameScore.UI.ViewComponents
 		private List<SelectListItem> CreateGradeSelectListItem()
 		{
 			return new List<SelectListItem>() {
-				new SelectListItem { Text = "Select Grade", Value = "" },
+				new SelectListItem { Text = "Not Rated", Value = "" },
 				new SelectListItem { Text = "Horrible", Value = "1" },
 				new SelectListItem { Text = "Very Bad", Value = "2" },
 				new SelectListItem { Text = "Bad", Value = "3" },

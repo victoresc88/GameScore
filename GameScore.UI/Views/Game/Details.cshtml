@@ -8,7 +8,7 @@
 
 <div class="container">
 	<div class="row">
-		@await Component.InvokeAsync("Score")
+		@await Component.InvokeAsync("Score", new { id = Model.Id })		
 		@await Component.InvokeAsync("Rate", new { id = Model.Id })
 	</div>
 </div>

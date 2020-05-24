@@ -7,5 +7,6 @@ namespace GameScore.RL.Interfaces
 	{
 		public Rate GetRateOfUserByGameId(int id, string username);
 		public IEnumerable<Rate> GetListOfRatesByGameId(int id);
+		public int GetNumberOfRatesByGameId(int id);
 	}
 }

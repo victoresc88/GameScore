@@ -45,6 +45,11 @@ namespace GameScore.BL
 			return _wrapperRepository.Rate.GetRateOfUserByGameId(id, username);
 		}
 
+		public int GetNumberOfRatesByGameId(int id)
+		{
+			return _wrapperRepository.Rate.GetNumberOfRatesByGameId(id);
+		}
+
 		private float CalculateAverageOfCurrentRate(Rate rate)
 		{
 			var arrayOfRates = new float[] { rate.Graphics, rate.Gameplay, rate.Sound, rate.Narrative };

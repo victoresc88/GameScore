@@ -7,5 +7,6 @@ namespace GameScore.BL.Interfaces
 		public Rate Update(Rate sourceRate, Rate currentRate);
 		public Rate GetRateOfUserByGameId(int id, string username);
 		public Rate Create(Rate rate, User user);
+		public int GetNumberOfRatesByGameId(int id);
 	}
 }

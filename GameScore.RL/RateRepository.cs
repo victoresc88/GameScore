@@ -27,5 +27,12 @@ namespace GameScore.RL
 			return _context.Rates
 				.Where(r => r.GameId == id);
 		}
+
+		public int GetNumberOfRatesByGameId(int id)
+		{
+			return _context.Rates
+				.Where(r => r.GameId == id)
+				.Count();
+		}
 	}
 }
