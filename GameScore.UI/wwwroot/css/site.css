@@ -69,18 +69,3 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
-
-.rate-container {
-   margin-top: 5px;
-   display: flex;
-}
-
-.rate-icon {
-   margin-right: 5px;
-   margin-top: 10px;
-}
-
-.submit-rate {
-   margin-top: 10px;
-   margin-left: 17px;
-}
