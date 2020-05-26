@@ -39,9 +39,9 @@ namespace GameScore.UI.Controllers
 			SetSearchItemsInCache(name);
 
 			var pageNumber = 0;
-			var gamesByIndex = GetItemsForPage(pageNumber);
+			var listOfGames = GetListOfGamesForPage(pageNumber);
 
-			return View("SearchList", gamesByIndex.Values.ToList());
+			return View("SearchList", listOfGames);
 		}
 
 		[HttpGet]
@@ -49,32 +49,37 @@ namespace GameScore.UI.Controllers
 		public PartialViewResult RenderSearchListPage(int? pageNumber)
 		{
 			pageNumber = pageNumber ?? 0;
-			var gamesByIndex = GetItemsForPage(pageNumber.Value);
+			var listOfGames = GetListOfGamesForPage(pageNumber.Value);
 
-			return PartialView("_GamesPage", gamesByIndex.Values.ToList());
+			return PartialView("_GamesPage", listOfGames);
 		}
 
-		private Dictionary<int, GameViewModel> GetItemsForPage(int pageNumber)
+		private List<GameViewModel> GetListOfGamesForPage(int pageNumber)
 		{
-			var gamesByIndex = _cache.Get("_SearchListEntry") as Dictionary<int, GameViewModel>;
-
 			var indexFrom = pageNumber * ITEMS_PER_PAGE;
 			var indexTo = indexFrom + ITEMS_PER_PAGE;
 
-			return gamesByIndex
-				 .Where(x => x.Key > indexFrom && x.Key <= indexTo)
-				 .ToDictionary(x => x.Key, x => x.Value);
+			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_SearchListEntry");
+			var gamesByIndex = _mapper.Map<Dictionary<int, GameViewModel>>(gamesByIndexInCache);
+			var listOfGames = gamesByIndex
+				.Where(x => x.Key > indexFrom && x.Key <= indexTo)
+				.ToDictionary(x => x.Key, x => x.Value).Values
+				.ToList();
+
+			return listOfGames;
 		}
 
 		private void SetSearchItemsInCache(string name)
 		{
-			var listOfCache = (_cache.Get("_GamesEntry") as Dictionary<int, GameViewModel>).Values.ToList();
-			var listOfGames = listOfCache
-				.Where(x => x.Name.ToLower().Contains(name.ToLower()))
+			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_GamesEntry").Values.ToList();
+			var listOfSearchedGames = gamesByIndexInCache
+				.Where(x => x.Name
+					.ToLower()
+					.Contains(name.ToLower()))
 				.ToList();
 
 			var gameIndex = 1;
-			var searchedGamestByIndex = listOfGames.ToDictionary(x => gameIndex++, x => x);
+			var searchedGamestByIndex = listOfSearchedGames.ToDictionary(x => gameIndex++, x => x);
 
 			_cache.Set("_SearchListEntry", searchedGamestByIndex, new MemoryCacheEntryOptions());
 		}

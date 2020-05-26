@@ -8,6 +8,7 @@ namespace GameScore.BL.Interfaces
 	{
 		public Game GetGameById(int id);
 		public IEnumerable<Game> GetListOfGames();
-		public Dictionary<int, Game> GetListOfGamesForPage(IMemoryCache cache, int numberOfPage);
+		public Dictionary<int, Game> GetGamesByIndexForPage(Dictionary<int, Game> gamesByIndex, int numberOfPage);
+		public Dictionary<int, Game> GetGameByIndexFromCache(IMemoryCache cache, string entry);
 	}
 }

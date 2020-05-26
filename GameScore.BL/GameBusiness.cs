@@ -28,15 +28,19 @@ namespace GameScore.BL
 			return _wrapperRepository.Game.GetListOfGames();
 		}
 
-		public Dictionary<int, Game> GetListOfGamesForPage(IMemoryCache cache, int numberOfPage)
+		public Dictionary<int, Game> GetGamesByIndexForPage(Dictionary<int, Game> gamesByIndex, int numberOfPage)
 		{
-			var gamesByIndex = cache.Get("_GamesEntry") as Dictionary<int, Game>;
 			var indexFrom = numberOfPage * ITEMS_PER_PAGE;
 			var indexTo = indexFrom + ITEMS_PER_PAGE;
 
 			return gamesByIndex
 				.Where(g => g.Key > indexFrom && g.Key <= indexTo)
 				.ToDictionary(g => g.Key, g => g.Value);
+		}
+
+		public Dictionary<int, Game> GetGameByIndexFromCache(IMemoryCache cache, string entry)
+		{
+			return cache.Get(entry) as Dictionary<int, Game>;
 		}
 	}
 }

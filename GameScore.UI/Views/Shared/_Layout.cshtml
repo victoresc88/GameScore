@@ -10,14 +10,19 @@
 <body class="bg-white">
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-			<div class="container">
-				<a class="navbar-brand" asp-controller="Home" asp-action="Index">GameScore</a>
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-controller="Home" asp-action="Index"><h6>GameScore</h6></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						  aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="input-group md-form form-sm form-1 pl-0">
-					<input id="searchBar" class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" onchange="SearchGame();">
+				<div class="input-group">
+					<input id="searchBar" class="form-control search-form" type="text" placeholder="Search" aria-label="Search" onchange="SearchGame();">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
+							<i class="fa fa-search" onclick="SearchGame();"></i>
+						</button>
+					</span>
 				</div>
 				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<partial name="_LoginPartial" />

@@ -2,6 +2,7 @@
 using GameScore.Entities;
 using GameScore.UI.ViewModels;
 using GameScore.UI.Mapper.Converters;
+using System.Collections.Generic;
 
 namespace GameScore.UI.Mapper.Profiles
 {

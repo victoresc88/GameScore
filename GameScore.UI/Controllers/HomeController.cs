@@ -31,7 +31,8 @@ namespace GameScore.UI.Controllers
 			SetListOfGamesInCache();
 
 			var numberOfPage = 0;
-			var gamesByIndex = _wrapperBusiness.Game.GetListOfGamesForPage(_cache, numberOfPage);
+			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_GamesEntry");
+			var gamesByIndex = _wrapperBusiness.Game.GetGamesByIndexForPage(gamesByIndexInCache, numberOfPage);
 
 			return View("Index", _mapper.Map<IEnumerable<GameViewModel>>(gamesByIndex.Values.ToList()));
 		}
@@ -40,7 +41,8 @@ namespace GameScore.UI.Controllers
 		public IActionResult RenderGamesPage(int? pageNumber)
 		{
 			var numberOfPage = pageNumber ?? 0;
-			var gamesByIndex = _wrapperBusiness.Game.GetListOfGamesForPage(_cache, numberOfPage);
+			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_GamesEntry");
+			var gamesByIndex = _wrapperBusiness.Game.GetGamesByIndexForPage(gamesByIndexInCache, numberOfPage);
 
 			return PartialView("_GamesPage", _mapper.Map<IEnumerable<GameViewModel>>(gamesByIndex.Values.ToList()));
 		}
