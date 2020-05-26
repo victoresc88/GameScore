@@ -15,7 +15,7 @@ $("#submitRating").click(function () {
       type: 'POST',
       success: function (data) {
          console.log(data);
-         $("#score-component-container").html(data);
+         $("#scoreContainer").html(data);
       }
    });
 });
