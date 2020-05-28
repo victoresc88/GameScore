@@ -1,5 +1,9 @@
 ﻿@model GameScore.UI.ViewModels.GameDetailsViewModel
 
+@{ 
+	Layout = "_Layout";
+}
+
 <div class="col-xs-12 col-md-12 ">
 	<h1>@Model.Name (@Model.ReleaseDate)</h1>
 	<img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">

@@ -81,3 +81,11 @@ body {
    border-radius: 0px 30px 30px 0px;
    cursor: pointer;
 }
+
+.custom-container {
+   width: 100%;
+   padding-right: 15px;
+   padding-left: 15px;
+}
+
+
