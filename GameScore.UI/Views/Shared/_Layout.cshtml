@@ -7,17 +7,17 @@
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body class="bg-white">
+<body class="bg-dark">
 	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
 			<div class="container-fluid">
-				<a class="navbar-brand" asp-controller="Home" asp-action="Index"><h6>GameScore</h6></a>
+				<a class="navbar-brand text-white" asp-controller="Home" asp-action="Index"><h6>GameScore</h6></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						  aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="input-group">
-					<input id="searchBar" class="form-control search-form" type="text" placeholder="Search" aria-label="Search" onchange="SearchGame();">
+					<input id="searchBar" class="form-control search-form text-dark" type="text" placeholder="Search" aria-label="Search" onchange="SearchGame();">
 					<span class="input-group-btn">
 						<button type="submit" class="btn btn-primary search-btn" data-target="#search-form" name="q">
 							<i class="fa fa-search" onclick="SearchGame();"></i>

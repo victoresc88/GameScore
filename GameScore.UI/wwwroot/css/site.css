@@ -88,4 +88,6 @@ body {
    padding-left: 15px;
 }
 
-
+#platformLink:hover {
+    background-color: darkblue !important;
+}

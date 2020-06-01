@@ -28,10 +28,11 @@ namespace GameScore.UI.Controllers
 
 		public IActionResult Index()
 		{
-			SetListOfGamesInCache();
+			var listOfGames = _wrapperBusiness.Game.GetListOfGames();
+			_wrapperBusiness.Cache.SetListOfGames(listOfGames);
 
 			var numberOfPage = 0;
-			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_GamesEntry");
+			var gamesByIndexInCache = _wrapperBusiness.Cache.GetGamesByIndex("_GamesEntry");
 			var gamesByIndex = _wrapperBusiness.Game.GetGamesByIndexForPage(gamesByIndexInCache, numberOfPage);
 
 			return View("Index", _mapper.Map<IEnumerable<GameViewModel>>(gamesByIndex.Values.ToList()));
@@ -41,25 +42,10 @@ namespace GameScore.UI.Controllers
 		public IActionResult RenderGamesPage(int? pageNumber)
 		{
 			var numberOfPage = pageNumber ?? 0;
-			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_GamesEntry");
+			var gamesByIndexInCache = _wrapperBusiness.Cache.GetGamesByIndex("_GamesEntry");
 			var gamesByIndex = _wrapperBusiness.Game.GetGamesByIndexForPage(gamesByIndexInCache, numberOfPage);
 
 			return PartialView("_GamesPage", _mapper.Map<IEnumerable<GameViewModel>>(gamesByIndex.Values.ToList()));
-		}
-
-		private void SetListOfGamesInCache()
-		{
-			var index = 1;
-			var listOfGames = _wrapperBusiness.Game.GetListOfGames();
-			var gamesByIndex = listOfGames
-				.ToDictionary(g => index++, g => g);
-
-			_cache.Set(
-				"_GamesEntry", 
-				gamesByIndex, 
-				new MemoryCacheEntryOptions()
-					.SetSlidingExpiration(TimeSpan.FromMinutes(60))
-			);
 		}
 	}
 }

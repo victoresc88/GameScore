@@ -6,5 +6,5 @@
 
 function SearchGame() {
     var name = $("#searchBar").val();
-    window.location = searchUrl + '?name=' + name;
+    window.location = searchUrl + '?keyword=' + name;
 }

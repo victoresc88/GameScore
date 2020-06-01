@@ -7,7 +7,7 @@ $("#submitRating").click(function () {
       Narrative: $("#narrativeSelect").val(),
       GameId: $("#gameId").html()
    });
-
+    console.log("heeey");
    $.ajax({
       url: '/Rate/Submit',
       data: dataObject,

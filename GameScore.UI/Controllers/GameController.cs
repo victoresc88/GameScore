@@ -34,15 +34,16 @@ namespace GameScore.UI.Controllers
 		}
 
 		[AllowAnonymous]
-		public IActionResult Search(string name)
+		public IActionResult Search(string keyword)
 		{
-			SetSearchItemsInCache(name);
+			//SetSearchItemsInCache(name);
+			_wrapperBusiness.Cache.SetSearchedGames(keyword);
 
 			var pageNumber = 0;
 			var listOfGames = GetListOfGamesForPage(pageNumber);
 
 			return View("SearchList", listOfGames);
-		}
+		} 
 
 		[HttpGet]
 		[AllowAnonymous]
@@ -59,7 +60,7 @@ namespace GameScore.UI.Controllers
 			var indexFrom = pageNumber * ITEMS_PER_PAGE;
 			var indexTo = indexFrom + ITEMS_PER_PAGE;
 
-			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_SearchListEntry");
+			var gamesByIndexInCache = _wrapperBusiness.Cache.GetGamesByIndex("_SearchListEntry");
 			var gamesByIndex = _mapper.Map<Dictionary<int, GameViewModel>>(gamesByIndexInCache);
 			var listOfGames = gamesByIndex
 				.Where(x => x.Key > indexFrom && x.Key <= indexTo)
@@ -71,7 +72,7 @@ namespace GameScore.UI.Controllers
 
 		private void SetSearchItemsInCache(string name)
 		{
-			var gamesByIndexInCache = _wrapperBusiness.Game.GetGameByIndexFromCache(_cache, "_GamesEntry").Values.ToList();
+			var gamesByIndexInCache = _wrapperBusiness.Cache.GetGamesByIndex("_GamesEntry").Values.ToList();
 			var listOfSearchedGames = gamesByIndexInCache
 				.Where(x => x.Name
 					.ToLower()

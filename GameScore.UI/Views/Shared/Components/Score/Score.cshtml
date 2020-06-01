@@ -1,10 +1,10 @@
 ﻿@model GameScore.UI.ViewModels.ScoreViewModel;
 
 @{
-	//Layout = "_ViewComponentLayout";
+	Layout = "_ViewComponentLayout";
 }
 
-<div class="col-xs-12 col-md-6 text-center">
+<div class="text-center text-white">
 	<h1>@Model.Total</h1>
 	<stars-component score="@Model.Total"></stars-component>
 	<div class="user-rates">
@@ -12,7 +12,7 @@
 		<span>@Model.NumberOfRates</span>
 	</div>
 </div>
-<div class="col-xs-12 col-md-6">
+<div class="text-white">
 	<div class="row">
 		<div class="col-xs-2 col-md-1">
 			<span title="Graphics" class="fas fa-camera"></span>

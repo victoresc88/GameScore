@@ -37,10 +37,5 @@ namespace GameScore.BL
 				.Where(g => g.Key > indexFrom && g.Key <= indexTo)
 				.ToDictionary(g => g.Key, g => g.Value);
 		}
-
-		public Dictionary<int, Game> GetGameByIndexFromCache(IMemoryCache cache, string entry)
-		{
-			return cache.Get(entry) as Dictionary<int, Game>;
-		}
-	}
+    }
 }

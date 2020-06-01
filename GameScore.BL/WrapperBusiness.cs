@@ -1,20 +1,24 @@
 ﻿using GameScore.BL.Interfaces;
 using GameScore.RL.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace GameScore.BL
 {
 	public class WrapperBusiness : IWrapperBusiness
 	{
 		private IWrapperRepository _wrapperRepository;
+		private IMemoryCache _memoryCache;
 
 		private IAccountBusiness _account;
 		private IGameBusiness _game;
 		private IScoreBusiness _score;
 		private IRateBusiness _rate;
+		private ICacheBusiness _cache;
 
-		public WrapperBusiness(IWrapperRepository wrapperRepository)
+		public WrapperBusiness(IWrapperRepository wrapperRepository, IMemoryCache memoryCache)
 		{
 			_wrapperRepository = wrapperRepository;
+			_memoryCache = memoryCache;
 		}
 
 		public IAccountBusiness Account
@@ -52,5 +56,14 @@ namespace GameScore.BL
 				return _rate;
 			}
 		}
+
+		public ICacheBusiness Cache
+        {
+			get
+            {
+				if (_cache == null) { _cache = new CacheBusiness(_memoryCache); }
+				return _cache;
+            }
+        }
 	}
 }

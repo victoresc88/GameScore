@@ -1,14 +1,14 @@
 ﻿@model GameScore.UI.ViewModels.RateViewModel
 
 @{
-	//Layout = "_ViewComponentLayout";
+	Layout = "_ViewComponentLayout";
 }
 
 <div id="gameId" style="visibility: hidden; display: none">@Model.GameId</div>
 
 @if (User.Identity.IsAuthenticated)
 {
-	<div class="row rate-container">
+	<div class="row rate-container text-white">
 		<div class="col-xs-2 col-md-1 text-center">
 			<span title="Graphics" class="fas fa-camera rate-icon"></span>
 		</div>
@@ -22,7 +22,7 @@
 			<select asp-for="Gameplay" asp-items="@Model.Grades" id="gameplaySelect" class="form-control"></select>
 		</div>
 	</div>
-	<div class="row rate-container">
+	<div class="row rate-container text-white">
 		<div class="col-xs-2 col-md-1">
 			<span title="Sound" class="fas fa-headphones rate-icon"></span>
 		</div>
