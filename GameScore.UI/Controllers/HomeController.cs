@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using GameScore.UI.ViewModels;
 using GameScore.BL.Interfaces;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GameScore.UI.Controllers
@@ -16,14 +15,12 @@ namespace GameScore.UI.Controllers
 		public const int ITEMS_PER_PAGE = 20;
 
 		private readonly IWrapperBusiness _wrapperBusiness;
-		private readonly IMemoryCache _cache;
 		private readonly IMapper _mapper;
 
-		public HomeController(IWrapperBusiness wrapperBusiness, IMapper mapper, IMemoryCache cache)
+		public HomeController(IWrapperBusiness wrapperBusiness, IMapper mapper)
 		{
 			_wrapperBusiness = wrapperBusiness;
 			_mapper = mapper;
-			_cache = cache;
 		}
 
 		public IActionResult Index()

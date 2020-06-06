@@ -5,7 +5,6 @@ using GameScore.BL.Interfaces;
 using GameScore.UI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace GameScore.UI.Controllers
 {
@@ -14,14 +13,12 @@ namespace GameScore.UI.Controllers
 		public const int ITEMS_PER_PAGE = 20;
 
 		private readonly IWrapperBusiness _wrapperBusiness;
-		private readonly IMemoryCache _cache;
 		private readonly IMapper _mapper;
 
-		public GameController(IWrapperBusiness wrapperBusiness, IMapper mapper, IMemoryCache cache)
+		public GameController(IWrapperBusiness wrapperBusiness, IMapper mapper)
 		{
 			_wrapperBusiness = wrapperBusiness;
 			_mapper = mapper;
-			_cache = cache;
 		}
 
 		[AllowAnonymous]
@@ -68,21 +65,6 @@ namespace GameScore.UI.Controllers
 				.ToList();
 
 			return listOfGames;
-		}
-
-		private void SetSearchItemsInCache(string name)
-		{
-			var gamesByIndexInCache = _wrapperBusiness.Cache.GetGamesByIndex("_GamesEntry").Values.ToList();
-			var listOfSearchedGames = gamesByIndexInCache
-				.Where(x => x.Name
-					.ToLower()
-					.Contains(name.ToLower()))
-				.ToList();
-
-			var gameIndex = 1;
-			var searchedGamestByIndex = listOfSearchedGames.ToDictionary(x => gameIndex++, x => x);
-
-			_cache.Set("_SearchListEntry", searchedGamestByIndex, new MemoryCacheEntryOptions());
 		}
 	}
 }
