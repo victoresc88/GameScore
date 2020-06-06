@@ -1,10 +1,5 @@
-﻿using GameScore.BL.Interfaces;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GameScore.UI.TagHelpers
 {

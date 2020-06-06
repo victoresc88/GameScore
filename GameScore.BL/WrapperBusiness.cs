@@ -1,4 +1,5 @@
 ﻿using GameScore.BL.Interfaces;
+using GameScore.Entities;
 using GameScore.RL.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -14,6 +15,8 @@ namespace GameScore.BL
 		private IScoreBusiness _score;
 		private IRateBusiness _rate;
 		private ICacheBusiness _cache;
+		private IGenreBusiness _genre;
+		private IPlatformBusiness _platform;
 
 		public WrapperBusiness(IWrapperRepository wrapperRepository, IMemoryCache memoryCache)
 		{
@@ -65,5 +68,23 @@ namespace GameScore.BL
 				return _cache;
             }
         }
-	}
+
+        public IGenreBusiness Genre
+        {
+			get
+			{
+				if (_genre == null) { _genre = new GenreBusiness(_wrapperRepository); }
+				return _genre;
+			}
+		}
+
+        public IPlatformBusiness Platform
+        {
+			get
+			{
+				if (_platform == null) { _platform = new PlatformBusiness(_wrapperRepository); }
+				return _platform;
+			}
+		}
+    }
 }

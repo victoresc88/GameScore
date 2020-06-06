@@ -1,4 +1,5 @@
 ﻿
-.sidebar-item :hover {
-    background-color: #808080;
+.sidebar-item:hover {
+    background-color: dimgray !important;
+    transition: 1s;
 }

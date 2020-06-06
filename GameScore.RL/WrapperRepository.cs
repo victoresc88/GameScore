@@ -11,6 +11,8 @@ namespace GameScore.RL
 		private IGameRepository _game;
 		private IRateRepository _rate;
 		private IScoreRepository _score;
+		private IGenreRepository _genre;
+		private IPlatformRepository _platform;
 
 		public WrapperRepository()
 		{
@@ -52,6 +54,24 @@ namespace GameScore.RL
 				return _score;
 			}
 		}
+
+		public IGenreRepository Genre
+		{
+			get
+			{
+				if (_genre == null) { _genre = new GenreRepository(_context); }
+				return _genre;
+			}
+		}
+
+		public IPlatformRepository Platform
+        {
+			get
+            {
+				if (_platform == null) { _platform = new PlatformRepository(_context); }
+				return _platform;
+			}
+        }
 
 		public void Save()
 		{

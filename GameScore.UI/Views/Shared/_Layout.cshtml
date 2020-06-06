@@ -1,19 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - GameScore</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GameScore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/sidebar.css" />
 </head>
 <body class="bg-dark">
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
 			<div class="container-fluid">
-				<a class="navbar-brand text-white" asp-controller="Home" asp-action="Index"><h6>GameScore</h6></a>
+				<a class="navbar-brand text-white" asp-controller="Home" asp-action="Index">
+					<h6>GameScore</h6>
+				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						  aria-expanded="false" aria-label="Toggle navigation">
+					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="input-group">
@@ -31,7 +34,7 @@
 		</nav>
 	</header>
 	<div class="custom-container d-flex">
-		<div class="col-2">
+		<div class="col-md-2 col-xs-2">
 			<partial name="_Sidebar" />
 		</div>
 		<main role="main" class="col-10 pb-3">

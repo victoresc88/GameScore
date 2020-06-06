@@ -1,7 +1,7 @@
 ﻿
 <div class="h-100">
     <nav class="h-100">
-        <div class="sidebar-header text-white">
+        <div class="text-center sidebar-header text-white">
             <h1>GameScore</h1>
         </div>
 
@@ -9,49 +9,22 @@
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="active nav-item">
-                <h5 class="text-white text-capitalize">Advanced Search</h5>
-                <a id="platformLink" href="#platforms" data-toggle="collapse" aria-expanded="false" class="sidebar-item nav-link text-white">Platforms</a>
-                <ul class="collapse list-unstyled" id="platforms">
-                    <li>
-                        <a href="#">PlayStation 4</a>
-                    </li>
-                    <li>
-                        <a href="#">Xbox One X</a>
-                    </li>
-                    <li>
-                        <a href="#">Switch</a>
-                    </li>
+                <h5 class="text-center text-white text-capitalize">Advanced Search:</h5>
+                <a href="#platforms" data-toggle="collapse" aria-expanded="false" class="text-center sidebar-item nav-link text-white">Platforms</a>
+                <ul class="text-center collapse list-unstyled" id="platforms">
+                    <platform-list-component></platform-list-component>
                 </ul>
             </li>
             <li class="active nav-item">
-                <a href="#genres" data-toggle="collapse" aria-expanded="false" class="nav-link text-white">Genres</a>
-                <ul class="collapse list-unstyled" id="genres">
-                    <li>
-                        <a href="#">Shooter</a>
-                    </li>
-                    <li>
-                        <a href="#">Platform</a>
-                    </li>
-                    <li>
-                        <a href="#">RPG</a>
-                    </li>
+                <a href="#genres" data-toggle="collapse" aria-expanded="false" class="text-center sidebar-item nav-link text-white">Genres</a>
+                <ul class="text-center collapse list-unstyled" id="genres">
+                    <genre-list-component></genre-list-component>
                 </ul>
             </li>
             <li class="active nav-item">
-                <a href="#scores" data-toggle="collapse" aria-expanded="false" class="nav-link text-white">Bests Scores</a>
-                <ul class="collapse list-unstyled" id="scores">
-                    <li>
-                        <a href="#">Graphics</a>
-                    </li>
-                    <li>
-                        <a href="#">Gameplay</a>
-                    </li>
-                    <li>
-                        <a href="#">Sound</a>
-                    </li>
-                    <li>
-                        <a href="#">Narrative</a>
-                    </li>
+                <a href="#scores" data-toggle="collapse" aria-expanded="false" class="text-center sidebar-item nav-link text-white">Bests Scores</a>
+                <ul class="text-center collapse list-unstyled" id="scores">
+                    <score-list-component></score-list-component>
                 </ul>
             </li>
         </ul>

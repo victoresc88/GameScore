@@ -11,5 +11,7 @@ namespace GameScore.BL.Interfaces
 		public IScoreBusiness Score { get; }
 		public IRateBusiness Rate { get; }
 		public ICacheBusiness Cache { get; }
+		public IGenreBusiness Genre { get; }
+		public IPlatformBusiness Platform { get; }
 	}
 }

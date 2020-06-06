@@ -6,7 +6,9 @@
 
 <div class="text-center text-white">
 	<h1>@Model.Total</h1>
+
 	<stars-component score="@Model.Total"></stars-component>
+
 	<div class="user-rates">
 		<span class="fas fa-users"></span>
 		<span>@Model.NumberOfRates</span>
@@ -19,7 +21,7 @@
 		</div>
 		<div class="col-xs-12 col-md-10 progress-container">
 			<div class="progress progress-striped">
-				<div class="progress-bar @Model.GraphicsProgress" role="progressbar" aria-valuenow="20"
+				<div class="progress-bar-striped @Model.GraphicsProgress" role="progressbar" aria-valuenow="20"
 						aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Graphics * 10)%">
 					@Model.Graphics
 				</div>
@@ -32,7 +34,7 @@
 		</div>
 		<div class="col-xs-12 col-md-10 progress-container">
 			<div class="progress progress-striped">
-				<div class="progress-bar @Model.GameplayProgress" role="progressbar" aria-valuenow="20"
+				<div class="progress-bar-striped @Model.GameplayProgress" role="progressbar" aria-valuenow="20"
 						aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Gameplay * 10)%">
 					@Model.Gameplay
 				</div>
@@ -45,7 +47,7 @@
 		</div>
 		<div class="col-xs-12 col-md-10 progress-container">
 			<div class="progress progress-striped">
-				<div class="progress-bar @Model.SoundProgress" role="progressbar" aria-valuenow="20"
+				<div class="progress-bar-striped @Model.SoundProgress" role="progressbar" aria-valuenow="20"
 						aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Sound * 10)%">
 					@Model.Sound
 				</div>
@@ -58,7 +60,7 @@
 		</div>
 		<div class="col-xs-12 col-md-10 progress-container">
 			<div class="progress progress-striped">
-				<div class="progress-bar @Model.NarrativeProgress" role="progressbar" aria-valuenow="20"
+				<div class="progress-bar-striped @Model.NarrativeProgress" role="progressbar" aria-valuenow="20"
 						aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Narrative * 10)%">
 					@Model.Narrative
 				</div>

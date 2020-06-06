@@ -7,6 +7,8 @@ namespace GameScore.RL.Interfaces
 		public IGameRepository Game { get; }
 		public IRateRepository Rate { get; }
 		public IScoreRepository Score { get; }
+		public IGenreRepository Genre { get; }
+		public IPlatformRepository Platform { get; }
 		public void Save();
 	}
 }
