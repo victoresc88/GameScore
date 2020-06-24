@@ -13,6 +13,12 @@ namespace GameScore.RL
 		{
 		}
 
+		public IEnumerable<Game> GetGames()
+		{
+			return _context.Games
+				.OrderByDescending(g => g.ReleaseDate);
+		}
+
 		public Game GetGameById(int id)
 		{
 			return _context.Games
@@ -21,10 +27,23 @@ namespace GameScore.RL
 				.FirstOrDefault();
 		}
 
-		public IEnumerable<Game> GetListOfGames()
-		{
-			return _context.Games
-				.OrderByDescending(g => g.ReleaseDate);
+        public IEnumerable<Game> GetGamesByGenreId(int id)
+        {
+			return _context.GenreGames
+				.Where(g => g.GenreId == id)
+				.Include(g => g.Game)
+				.Select(g => g.Game)
+				.ToList();
 		}
+
+		public IEnumerable<Game> GetGamesByPlatformId(int id)
+        {
+			return _context.PlatformGames
+				.Where(g => g.PlatformId == id)
+				.Include(g => g.Game)
+				.Select(g => g.Game)
+				.ToList();
+		}
+
 	}
 }

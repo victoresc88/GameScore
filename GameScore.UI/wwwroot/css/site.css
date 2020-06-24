@@ -87,3 +87,8 @@ body {
    padding-right: 15px;
    padding-left: 15px;
 }
+
+.game-item {
+    background-color: transparent !important;
+    transition: 1s;
+}

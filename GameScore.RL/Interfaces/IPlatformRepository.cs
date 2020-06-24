@@ -5,6 +5,6 @@ namespace GameScore.RL.Interfaces
 {
     public interface IPlatformRepository
     {
-        public IEnumerable<Platform> GetListOfPlatforms();
+        public IEnumerable<Platform> GetPlatforms();
     }
 }

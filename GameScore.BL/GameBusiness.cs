@@ -1,7 +1,6 @@
 ﻿using GameScore.BL.Interfaces;
 using GameScore.Entities;
 using GameScore.RL.Interfaces;
-using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,14 +17,24 @@ namespace GameScore.BL
 			_wrapperRepository = wrapperRepository;
 		}
 
+		public IEnumerable<Game> GetGames()
+		{
+			return _wrapperRepository.Game.GetGames();
+		}
+
 		public Game GetGameById(int id)
 		{
 			return _wrapperRepository.Game.GetGameById(id);
 		}
 
-		public IEnumerable<Game> GetListOfGames()
+		public IEnumerable<Game> GetGamesByGenreId(int id)
+        {
+			return _wrapperRepository.Game.GetGamesByGenreId(id);
+        }
+
+		public IEnumerable<Game> GetGamesByPlatformId(int id)
 		{
-			return _wrapperRepository.Game.GetListOfGames();
+			return _wrapperRepository.Game.GetGamesByPlatformId(id);
 		}
 
 		public Dictionary<int, Game> GetGamesByIndexForPage(Dictionary<int, Game> gamesByIndex, int numberOfPage)

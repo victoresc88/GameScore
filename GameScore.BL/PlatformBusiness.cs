@@ -14,9 +14,9 @@ namespace GameScore.BL
             _wrapperRepository = wrapperRepository;                
         }
 
-        public IEnumerable<Platform> GetListOfPlatforms()
+        public IEnumerable<Platform> GetPlatforms()
         {
-            return _wrapperRepository.Platform.GetListOfPlatforms();
+            return _wrapperRepository.Platform.GetPlatforms();
         }
     }
 }

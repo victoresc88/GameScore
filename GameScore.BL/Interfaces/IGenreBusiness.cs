@@ -5,6 +5,6 @@ namespace GameScore.BL.Interfaces
 {
     public interface IGenreBusiness
     {
-        public IEnumerable<Genre> GetListOfGenres();
+        public IEnumerable<Genre> GetGenres();
     }
 }

@@ -14,9 +14,9 @@ namespace GameScore.BL
             _wrapperRepository = wrapperRepository;
         }
 
-        public IEnumerable<Genre> GetListOfGenres()
+        public IEnumerable<Genre> GetGenres()
         {
-            return _wrapperRepository.Genre.GetListOfGenres();
+            return _wrapperRepository.Genre.GetGenres();
         }
     }
 }

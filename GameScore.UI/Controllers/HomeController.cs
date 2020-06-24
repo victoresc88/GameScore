@@ -25,7 +25,7 @@ namespace GameScore.UI.Controllers
 
 		public IActionResult Index()
 		{
-			var listOfGames = _wrapperBusiness.Game.GetListOfGames();
+			var listOfGames = _wrapperBusiness.Game.GetGames();
 			_wrapperBusiness.Cache.SetListOfGames(listOfGames);
 
 			var numberOfPage = 0;

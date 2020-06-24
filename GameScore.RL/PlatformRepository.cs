@@ -11,7 +11,7 @@ namespace GameScore.RL
         {
         }
 
-        public IEnumerable<Platform> GetListOfPlatforms()
+        public IEnumerable<Platform> GetPlatforms()
         {
             return _context.Platforms;
         }

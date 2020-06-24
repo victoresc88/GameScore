@@ -5,6 +5,6 @@ namespace GameScore.RL.Interfaces
 {
     public interface IGenreRepository
     {
-        public IEnumerable<Genre> GetListOfGenres();
+        public IEnumerable<Genre> GetGenres();
     }
 }

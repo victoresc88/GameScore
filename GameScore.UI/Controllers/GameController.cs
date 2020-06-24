@@ -33,13 +33,12 @@ namespace GameScore.UI.Controllers
 		[AllowAnonymous]
 		public IActionResult Search(string keyword)
 		{
-			//SetSearchItemsInCache(name);
 			_wrapperBusiness.Cache.SetSearchedGames(keyword);
 
 			var pageNumber = 0;
 			var listOfGames = GetListOfGamesForPage(pageNumber);
 
-			return View("SearchList", listOfGames);
+			return View("_SearchList", listOfGames);
 		} 
 
 		[HttpGet]

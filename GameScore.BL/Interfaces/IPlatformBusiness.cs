@@ -5,6 +5,7 @@ namespace GameScore.BL.Interfaces
 {
     public interface IPlatformBusiness
     {
-        public IEnumerable<Platform> GetListOfPlatforms();
+        public IEnumerable<Platform> GetPlatforms();
+
     }
 }

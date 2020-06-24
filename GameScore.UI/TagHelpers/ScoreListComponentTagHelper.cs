@@ -1,5 +1,4 @@
-﻿using GameScore.BL.Interfaces;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Text;
 
 namespace GameScore.UI.TagHelpers
@@ -11,7 +10,6 @@ namespace GameScore.UI.TagHelpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var content = new StringBuilder();
-
             content.Append("<li><a href='#'>Graphics</a></li>");
             content.Append("<li><a href='#'>Gameplay</a></li>");
             content.Append("<li><a href='#'>Sound</a></li>");

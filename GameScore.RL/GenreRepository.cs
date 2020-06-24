@@ -11,7 +11,7 @@ namespace GameScore.RL
         {
         }
 
-        public IEnumerable<Genre> GetListOfGenres()
+        public IEnumerable<Genre> GetGenres()
         {
             return _context.Genres;
         }
